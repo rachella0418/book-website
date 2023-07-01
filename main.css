@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    border: none;
+    padding: 0;
+    background-image: #f9f7f1;
+    background-position: center;
+    position: relative;
+    color: #2f2f2f;
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 1rem;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative; 
+}
+
+.logo {
+    width: 30%;
+    float: left;
+}
+
+#search-bar {
+    position: relative;
+    left: 58%;
+}
+
+.fa-solid {
+    transform: rotate(90deg);
+}
