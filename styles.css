@@ -1,45 +1,61 @@
 body {
-    font-family: 'Playfair Display', sans-serif;
-    font-size: 1.3rem;
     margin: 0;
-    overflow: hidden;
+    border: none;
+    padding: 0;
+    background-color: #f9f7f1;
+    color: #2f2f2f;
+    font-family: 'Playfair Display', sans-serif;
 }
 
 #header {
-    padding-top: 10px;
-    width: 100%;
-    height: 75px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    position: fixed;
-    top: 0;
 }
 
 .logo {
-    width: 250px;
-    padding-top: 15px;
-}
-
-a {
-    color: #18191A;
-    text-decoration: none;
-}
-
-nav > ul {
-    display: flex;
-    justify-content: space-evenly;
+    width: 25%;
+    margin-bottom: -50px;
+    justify-content: center;
     align-items: center;
-    padding-inline-start: 0;
-    margin-block: 0;
-    height: 100%;
 }
 
-a:not(:last-of-type) {
-    margin-right: 100px;
+h1:not(.signin) {
+    font-size: 30px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: -25px;
+    text-align: center;
+    padding-top: 20px;
 }
 
-a {
-    font-size: 25px;
-    font-weight: 600;
+#login-box {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 250px;
+    padding: 150px 100px;
+    margin-left: calc(100vw / 2.6);
+    justify-content: center;
+}
+
+.signin {
+    font-size: 40px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+input {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100px;
+}
+
+button:hover {
+    cursor: pointer;;
 }
