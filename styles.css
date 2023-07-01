@@ -18,10 +18,8 @@ body {
 
 .logo {
     width: 25%;
-    margin-top: 25px;
-    margin-bottom: -25px;
+    min-width: 500px;
     justify-content: center;
-    align-items: center;
 }
 
 h1:not(.signup) {
@@ -36,7 +34,7 @@ h1:not(.signup) {
     width: 100%;
     max-width: 350px;
     position: absolute;
-    top: -30%;
+    top: -50%;
     left: 50%;
     transform: translate(-50%, 50%);
     background-color: #f9f7f1;
