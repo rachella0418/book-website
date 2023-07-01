@@ -3,6 +3,7 @@ let email = document.getElementById("email");
 let signupBtn = document.getElementById("signup-btn");
 let signinBtn = document.getElementById("signin-btn");
 let question = document.getElementById("question");
+let showPass = document.getElementById("showPass");
 
 var flag = true;
 
@@ -28,3 +29,13 @@ signinBtn.onclick = function() {
 signupBtn.onclick = function() {
     email.style.maxHeight = "60px";
 }
+
+showPass.onclick = function() {
+    var input = document.getElementById("password");
+    if (input.type === "password") {
+        input.type = "text";
+    } else {
+        input.type = "password";
+    }
+}
+

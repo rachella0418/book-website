@@ -57,9 +57,19 @@ h1:not(.signup) {
     margin: 20px 0;
     display: flex;
     flex-direction: column;
-    max-height: 65px;
+    max-height: 85px;
     transition: max-height 0.5s;
     overflow: hidden;
+}
+
+.showpass-field {
+    margin-top: -10px;
+    padding-bottom: 20px;
+    font-size: 14px
+}
+
+input[type=checkbox] {
+    accent-color: #2f2f2f;
 }
 
 .input-field label {
@@ -70,7 +80,7 @@ p {
     padding-top: 20px;
 }
 
-input {
+.input-field input {
     width: 50%;
     height: 1rem;
     font-family: 'Playfair Display', sans-serif;
@@ -80,6 +90,7 @@ input {
 }
 
 button {
+    display: block;
     width: 100px;
     padding: 5px;
     border: 1px solid #2f2f2f;
