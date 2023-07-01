@@ -39,3 +39,8 @@ showPass.onclick = function() {
     }
 }
 
+let darkMode = document.getElementById("dark-mode");
+
+darkMode.onclick = function() {
+    document.getElementsByTagName("body").style.backgroundColor = white;
+}

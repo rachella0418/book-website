@@ -15,16 +15,18 @@ header {
     flex-direction: row;
     align-items: center;
     position: relative; 
+
 }
 
 .logo {
     width: 30%;
     float: left;
+    margin-right: 100px;
 }
 
 #search-bar {
     position: relative;
-    left: 48%;
+    margin-left: 100px;
     border: 3px solid #2f2f2f;
     border-radius: 30px;
     display: flex;
@@ -34,7 +36,7 @@ header {
 }
 
 .search {
-    width: 250px;
+    width: 350px;
     background: transparent;
     border: 0;
     outline: 0;
@@ -74,5 +76,37 @@ a {
 
 #nav-bar .fa-solid {
     margin-right: 10px;
+}
+
+.fa-moon {
+    color: #f9f7f1;
+    margin-left: 50px;
+    font-size: 1.8rem;
+    border: 1px solid black;
+    background-color: black;
+    padding: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 50%;
+}
+
+.fa-moon:hover {
+    cursor: pointer;
+}
+
+section {
+    position: relative;
+    margin-left: 50px;
+}
+
+section h1 {
+    font-size: 35px;
+}
+
+.divider {
+    width: 100%;
+    border: 3px solid #2f2f2f;
+    margin-top: -20px;
+    max-width: 1800px;
 }
 
