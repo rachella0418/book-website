@@ -4,6 +4,7 @@ body {
     padding: 0;
     background-image: url("./pictures/background-image.jpg");
     background-position: center;
+    position: relative;
     color: #2f2f2f;
     font-family: 'Playfair Display', sans-serif;
     font-size: 1rem;
@@ -23,36 +24,82 @@ body {
     align-items: center;
 }
 
-h1:not(.signin) {
+h1:not(.signup) {
     font-size: 30px;
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: -25px;
     text-align: center;
+}
+
+#signup-box { 
+    width: 100%;
+    max-width: 350px;
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: #f9f7f1;
+    padding: 100px 0 100px 100px;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+#signup-box h1 {
+    font-size: 40px;
+    margin-top: -20px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.input-field {
+    background: #f9f7f1;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}
+
+.input-field label {
+    padding-bottom: 10px;
+}
+
+p {
     padding-top: 20px;
 }
 
-#login-box { 
+input {
+    width: 50%;
+    height: 1rem;
+    font-family: 'Playfair Display', sans-serif;
+    padding: 3px;
+    border: 1px solid #2f2f2f;
+    border-radius: 10x;
+}
+
+button {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #2f2f2f;
     background-color: #f9f7f1;
-    display: flex;
-    flex-direction: column;
-    height: 250px;
-    width: 250px;
-    padding-top: 100px;
-    padding-bottom: 150px;
-    padding-left: 100px;
-    padding-right: 100px;
-    margin-left: calc(100vw / 2.6);
-    justify-content: center;
-    box-shadow: 5px 5px 15px #2f2f2f;
-    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 20px;
+    transition: background 0.5s;
 }
 
-.signin {
-    font-size: 40px;
+button:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #2f2f2f;
+    color: #f9f7f1
 }
 
-label {
+
+
+/*label {
     margin-bottom: 10px;
 }
 
@@ -77,4 +124,4 @@ button:hover {
     font-weight: bold;
     background-color: #2f2f2f;
     color: #f9f7f1
-}
+}*/

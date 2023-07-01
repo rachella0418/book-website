@@ -17,21 +17,32 @@
             <div id="header">
                 <img class="logo" src="./pictures/logo.png" alt="logo">
             </div>
-            <div id="login-box">
-                <h1 class="signin">Sign in</h1>
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username">
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password">
-                <form action="./main.html">
-                    <button type="submit">Log in</button>
-                </form>
-                <p>Don't have an account?</p>
-                <form action="./signup.html">
-                    <button type="submit">Sign up</button>
+            <div id="signup-box">
+                <h1 class="signup" id="title">Sign up</h1>
+                <form>
+                    <div class="input-field" id="email">
+                        <label for="email">Email address</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="input-field" id="usernameField">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                    <div class="input-field">
+                        <label for="password">Password</label>
+                        <input type="text" name="password" id="password"> 
+                    </div>
+                    <button type="button" id="signup-btn">Sign up</button>
                 </form>
                 
+                <p id="question">Already have an account?</p>
+                <form >
+                    <button type="button" id="signin-btn">Sign in</button>
+                </form>
             </div>
+
+            <script src="server.js"></script>
+
         </body>
     </main>
 </html>
