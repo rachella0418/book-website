@@ -38,9 +38,3 @@ showPass.onclick = function() {
         input.type = "password";
     }
 }
-
-let darkMode = document.getElementById("dark-mode");
-
-darkMode.onclick = function() {
-    document.getElementsByTagName("body").style.backgroundColor = white;
-}

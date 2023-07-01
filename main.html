@@ -14,7 +14,7 @@
     <main>
         <body>
             <header>
-                <img class="logo" src="./pictures/inline-black.png" alt="logo-black">
+                <img id="logo" src="./pictures/inline-black.png" alt="logo-black">
                 <nav id="nav-bar">
                     <i class="fa-solid fa-house"></i>
                     <li><a href="./main.html">Home</a></li>
@@ -27,7 +27,7 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" class="search" placeholder="Search">
                 </div>
-                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-moon" id="dark-mode"></i>
             </header>
             <section id="mylib-field">
                 <h1>My Library</h1>
@@ -38,7 +38,21 @@
                 <div class="divider"></div>
             </section>
         </body>
-        <script src="server.js"></script>
+        <script> 
+            let mode = document.getElementById("dark-mode");
+            let logo = document.getElementById("logo");
+            mode.onclick = function() {
+                document.body.classList.toggle("dark")
+                if (document.body.classList.contains("dark")) {
+                    mode.classList = "fa-solid fa-sun";
+                    logo.src = "./pictures/inline.png"
+                } else {
+                    mode.classList = "fa-solid fa-moon";
+                    logo.src = "./pictures/inline-black.png"
+
+                }
+            }
+        </script>
 
     </main>
 </html>
