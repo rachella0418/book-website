@@ -18,13 +18,13 @@ body {
     color: var(--secondary-color);
     font-family: 'Playfair Display', sans-serif;
     font-size: 1rem;
+    transition: background 1s;
 }
 
 header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    position: relative; 
 
 }
 
@@ -116,4 +116,21 @@ section h1 {
     margin-top: -20px;
     max-width: 1800px;
 }
+
+#bookshelf {
+    margin-top: 20px;
+    display: flex;
+    width: 1800px;
+}
+
+.book-cover {
+    width: 150px;
+    margin-right: 30px;
+}
+
+.book-title {
+    font-weight: bold;
+}
+
+
 
