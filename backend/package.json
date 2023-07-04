@@ -4,7 +4,8 @@
   "description": "backend of book website",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "passport-google-oauth2": "^0.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "prettier": "2.8.8"
   }
 }

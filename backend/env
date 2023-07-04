@@ -1,0 +1,3 @@
+PORT=3000
+MONGODB_URI=mongodb+srv://book-website2310:mElbPEwasm6kcVAT@cluster0.vbk9q6l.mongodb.net/
+MONGODB_PWD=mElbPEwasm6kcVAT
