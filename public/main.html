@@ -30,6 +30,13 @@
                 <button id="search-btn">Search</button>
                 <i class="fa-solid fa-moon" id="dark-mode"></i>
             </header>
+            <div class="book-list">
+                <h2>Search Result</h2>
+                <div id="list-output">
+                    <div id="row"></div>
+                        <!--card-->
+                </div>
+            </div>
             <section id="mylib-field">
                 <h1>My Library</h1>
                 <div class="divider"></div>
@@ -83,7 +90,7 @@
                 </div>
             </section>
         </body>
-        <script> 
+        <script>
             let mode = document.getElementById("dark-mode");
             let logo = document.getElementById("logo");
             mode.onclick = function() {
@@ -98,6 +105,13 @@
                 }
             }
         </script>
+            
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="app.js"> </script>
+
 
     </main>
 </html>

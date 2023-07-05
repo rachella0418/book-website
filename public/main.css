@@ -62,6 +62,7 @@ header {
     font-size: 1rem;
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
     border-radius: 30px;
     transition: background, 0.3s;
 }
@@ -116,6 +117,14 @@ a {
     border-radius: 50%;
     cursor: pointer;
 
+}
+
+.book-list {
+    visibility: hidden;
+}
+
+#mylib-field {
+    visibility: visible;
 }
 
 section {
