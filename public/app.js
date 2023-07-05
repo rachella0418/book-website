@@ -9,13 +9,13 @@ $(document).ready(function() {
     $("#search-btn").click(function() {
         $("#mylib-field").css("visibility", "hidden");
         $("#topread-field").css("visibility", "hidden");
+        $(".book-list").css("visibility", "visible");
         outputList.innerHTML = "";
         //document.body.style.backgroundImage - "url('')";
         searchData = $(".search").val();
+        console.log(searchData);
         if (searchData === null || searchData === "") {
-            $("#search-res").innerHTML = "No result";
-            $(".book-list").css("visibility", "visible");
-            
+            $("#search-res").innerHTML += "No result";
         } else {
             $.ajax( {
                 url: url + searchData,
@@ -23,14 +23,20 @@ $(document).ready(function() {
                 success: function(res) {
                     console.log(res);
                     if (res.totalItems === 0) {
-                        alert("No result");
+                        $("#search-res").innerHTML += "No result";
                     } else {
+                        $(".book-list").css("visibility", "visible");
                         displayResults(res);
                     }
+                },
+                error: function() {
+                    $("#search-res").innerHTML += "Something went wrong.. Please try again";
                 }
-            })
+            });
         }
-    })
+        $(".search").val("");
+    });
+    
 });
 
 
