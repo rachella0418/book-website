@@ -123,6 +123,11 @@ a {
     visibility: hidden;
 }
 
+#search-res {
+    margin-left: 50px;
+    font-size: 35px;
+}
+
 #mylib-field {
     visibility: visible;
 }
