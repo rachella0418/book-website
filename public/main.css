@@ -46,13 +46,30 @@ header {
 }
 
 .search {
-    width: 350px;
+    width: 250px;
     background: transparent;
     border: 0;
     outline: 0;
     padding: 18px 15px;
     font-size: 1rem;
     color: var(--secondary-color)
+}
+
+#search-btn {
+    margin-left: 10px;
+    padding: 10px;
+    font-family: "Playfair Display", sans-serif;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 30px;
+    transition: background, 0.3s;
+}
+
+#search-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
 }
 
 .fa-magnifying-glass {
