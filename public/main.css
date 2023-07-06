@@ -145,6 +145,7 @@ a {
     margin-left: 50px;
     float: left;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #book-about {
