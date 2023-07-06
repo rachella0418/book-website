@@ -2,7 +2,6 @@ $(document).ready(function() {
     var item, title, author, cover;
     var outputList = document.getElementById("list-output");
     var url = "https://www.googleapis.com/books/v1/volumes?q=";
-    var apiKey = "key=AIzaSyDKrjcPwfvHCVYKnQqRo4eBjd356wmlZAA";
     var placeholder = '../pictures/coverexample.jpg';
     var searchData;
 
