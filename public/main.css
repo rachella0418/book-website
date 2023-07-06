@@ -123,6 +123,33 @@ a {
     visibility: hidden;
 }
 
+#row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#col {
+    flex: 20%;
+    max-width: 20%;
+    margin-bottom: 10px;
+}
+
+#col img {
+    margin-top: 8px;
+    margin-left: 50px;
+    float: left;
+}
+
+#book-about {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#book-about span {
+    margin-bottom: 10px;
+}
+
 #search-res {
     margin-left: 50px;
     font-size: 35px;
