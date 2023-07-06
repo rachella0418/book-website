@@ -15,7 +15,8 @@ $(document).ready(function() {
         searchData = $(".search").val();
         console.log(searchData);
         if (searchData === null || searchData === "") {
-            $("#search-res").innerHTML += "No result";
+            document.getElementById("search-message").innerHTML = "We couldn't find what you were looking for :(";
+            $("#search-message").css("visibility", "visible");
         } else {
             $.ajax( {
                 url: url + searchData,
@@ -30,13 +31,14 @@ $(document).ready(function() {
                     }
                 },
                 error: function() {
-                    $("#search-res").innerHTML += "Something went wrong.. Please try again";
+                    document.getElementById("search-message").innerHTML = "Something went wrong. Please try again :(";
+                    $("#search-message").css("visibility", "visible");
                 }
             });
         }
         $(".search").val("");
     });
-    
+
 });
 
 
