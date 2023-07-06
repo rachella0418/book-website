@@ -3,6 +3,8 @@
     --secondary-color: #2f2f2f;
 }
 
+/* -------- DARK MODE -------- */
+
 .dark {
     --primary-color: #2f2f2f;
     --secondary-color: #f9f7f1;
@@ -20,6 +22,8 @@ body {
     font-size: 1rem;
     transition: background 1s;
 }
+
+/* -------- HEADER -------- */
 
 header {
     display: flex;
@@ -116,11 +120,13 @@ a {
     padding: 8px;
     border-radius: 50%;
     cursor: pointer;
-
 }
+
+/* -------- SEARCH RESULT -------- */
 
 .book-list {
     visibility: hidden;
+    margin-top: -100px;
 }
 
 #row {
@@ -138,6 +144,7 @@ a {
     margin-top: 8px;
     margin-left: 50px;
     float: left;
+    cursor: pointer;
 }
 
 #book-about {
@@ -159,8 +166,11 @@ a {
     margin-left: 50px;
     font-size: 1rem;
     font-weight: 600;
-    visibility: hidden;
 }
+
+
+/* -------- MY LIBRARY SECTION -------- */
+
 
 #mylib-field {
     visibility: visible;
