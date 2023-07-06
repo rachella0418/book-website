@@ -1,4 +1,20 @@
 $(document).ready(function() {
+    // DARK MODE
+    let mode = document.getElementById("dark-mode");
+    let logo = document.getElementById("logo");
+    mode.onclick = function() {
+        document.body.classList.toggle("dark")
+        if (document.body.classList.contains("dark")) {
+            mode.classList = "fa-solid fa-sun";
+            logo.src = "../pictures/inline.png"
+        } else {
+            mode.classList = "fa-solid fa-moon";
+            logo.src = "../pictures/inline-black.png"
+
+        }
+    }
+
+    // SEARCH FEATURE
     var item, title, author, cover;
     var outputList = document.getElementById("list-output");
     var url = "https://www.googleapis.com/books/v1/volumes?q=";
@@ -73,19 +89,9 @@ $(document).ready(function() {
                 cover4 = (item4.volumeInfo.imageLinks) ? item4.volumeInfo.imageLinks.thumbnail : placeholder;
                 row += formatOutput(cover4, title4, author4);
             }
-            
+
             row += '</div>';
             outputList.innerHTML += row;
-            /*item5 = res.items[i+4];
-            title5 = item5.volumeInfo.title;
-            author5 = item5.volumeInfo.authors;
-            cover5 = (item5.volumeInfo.imageLinks) ? item5.volumeInfo.imageLinks.thumbnail : placeholder;*/
-            /*outputList.innerHTML += '<div id="row">' +
-                                    formatOutput(cover1, title1, author1) +
-                                    formatOutput(cover2, title2, author2) +
-                                    formatOutput(cover3, title3, author3) +
-                                    formatOutput(cover4, title4, author4) +
-                                    '</div>';*/
             console.log(outputList);
         }
     }
@@ -96,11 +102,19 @@ $(document).ready(function() {
                         <div id="book-about">
                             <span class="book-title">${title}</span>
                             <span class="book-author">${author}</span>
+                            <select id="add-option">
+                                <option value="Select">Select</option>
+                                <option value="Read">Read</option>
+                                <option value="TBR">Currently Reading</option>
+                                <option value="TBR">Want To Read</option>
+                            </select>
                         </div>  
                     </div>`
         return card;
     }
+
 });
+
 
 
 

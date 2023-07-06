@@ -169,6 +169,19 @@ a {
     font-weight: 600;
 }
 
+.book-author {
+    font-style: italic;
+}
+
+#add-option {
+    background-color: var(--primary-color);
+    padding: 10px;
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 600;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+}
+
 
 /* -------- MY LIBRARY SECTION -------- */
 
