@@ -20,6 +20,7 @@ body {
     width: 25%;
     min-width: 500px;
     justify-content: center;
+    margin-top: 20px;
 }
 
 h1:not(.signup) {
@@ -34,7 +35,7 @@ h1:not(.signup) {
     width: 100%;
     max-width: 350px;
     position: absolute;
-    top: -50%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, 50%);
     background-color: #f9f7f1;
@@ -89,7 +90,8 @@ p {
 
 button {
     display: inline;
-    width: 100px;
+    width: 80px;
+    margin-right: 20px;
     padding: 5px;
     border: 1px solid #2f2f2f;
     background-color: #f9f7f1;
