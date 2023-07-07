@@ -21,6 +21,8 @@ body {
     transition: background 1s;
 }
 
+/* -------- HEADER -------- */
+
 header {
     display: flex;
     flex-direction: row;
@@ -42,7 +44,6 @@ header {
     display: flex;
     align-items: center;
     padding-left: 30px;
-
 }
 
 .search {
@@ -54,7 +55,6 @@ header {
     font-size: 1rem;
     color: var(--secondary-color)
 }
-
 
 #search-btn {
     font-weight: bold;
@@ -126,23 +126,26 @@ header {
     cursor: pointer;
 }
 
-
 #nav-bar .fa-solid {
     margin-right: 10px;
 }
 
 #dark-mode {
-    width: 30px;
-    color: var(--primary-color);
-    margin-left: 50px;
-    font-size: 1.8rem;
-    border: 1px solid var(--secondary-color);
-    background-color: var(--secondary-color);
+    font-size: 25px;
     padding: 8px;
+    color: var(--primary-color);
+    margin-left: 100px;
+    border: 3px solid var(--secondary-color);
     border-radius: 50%;
+    color: var(--secondary-color);
     cursor: pointer;
+    transition: background 0.3s;
 }
 
+#dark-mode:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
 /* -------- SEARCH RESULT -------- */
 
 .book-list {
@@ -201,4 +204,13 @@ header {
     font-weight: 600;
     border: 1px solid var(--secondary-color);
     border-radius: 8px;
+}
+
+.book-cover {
+    width: 150px;
+    margin-right: 30px;
+}
+
+.book-title {
+    font-weight: bold;
 }

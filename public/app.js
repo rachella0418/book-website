@@ -5,12 +5,9 @@ $(document).ready(function() {
     mode.onclick = function() {
         document.body.classList.toggle("dark")
         if (document.body.classList.contains("dark")) {
-            mode.classList = "fa-solid fa-sun";
             logo.src = "../pictures/inline.png"
         } else {
-            mode.classList = "fa-solid fa-moon";
             logo.src = "../pictures/inline-black.png"
-
         }
     }
 
@@ -38,7 +35,19 @@ $(document).ready(function() {
     var placeholder = '../pictures/coverexample.jpg';
     var searchData;
 
+    $(".search").keyup(function (event) {
+        if (event.keyCode === 13) {
+            $("#search-btn").click();
+        }
+    });
+
     $("#search-btn").click(function() {
+        search();
+    });
+
+    
+
+    function search() {
         console.log(window.location.href);
         if (window.location.href === "http://127.0.0.1:5500/public/main.html") {
             $("#mylib-field").css("visibility", "hidden");
@@ -77,7 +86,7 @@ $(document).ready(function() {
             });
         }
         $(".search").val("");
-    });
+    }
 
     function displayResults(res) {
         for (var i = 0; i < res.items.length; i += 4) {
