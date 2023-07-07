@@ -15,15 +15,21 @@ $(document).ready(function() {
     }
 
     //NAVIGATE TO DIFFERENT PAGE 
+    let currentPage = "home";
     $("#home-btn").click(function() {
+        currentPage = "home";
         window.location.replace("./main.html");
     });
     $("#mylib-btn").click(function() {
+        currentPage = "mylib";
         window.location.replace("./mylib.html");
     });
     $("#profile-btn").click(function() {
+        currentPage = "profile";
         window.location.replace("./profile.html");
     });
+
+    
 
     // SEARCH FEATURE
     var item, title, author, cover;
@@ -33,8 +39,13 @@ $(document).ready(function() {
     var searchData;
 
     $("#search-btn").click(function() {
-        $("#mylib-field").css("visibility", "hidden");
-        $("#topread-field").css("visibility", "hidden");
+        console.log(window.location.href);
+        if (window.location.href === "http://127.0.0.1:5500/public/main.html") {
+            $("#mylib-field").css("visibility", "hidden");
+            $("#topread-field").css("visibility", "hidden");
+        } else if (window.location.href === "http://127.0.0.1:5500/public/profile.html") {
+            $('#profile-field').css("visibility", "hidden");
+        }
         $(".book-list").css("visibility", "visible");
         $("#search-message").css("visibility", "hidden");
         $(".book-list").css("margin-top", "0");
