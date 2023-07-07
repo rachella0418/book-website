@@ -67,20 +67,43 @@ header {
     font-size: 1.4rem;
 }
 
-a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-#nav-bar li {
+#nav-bar button {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: bold;
     text-transform: uppercase;
-    list-style: none;
-    margin-top: -5px;   
+    font-size: 20px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    transition: background 1s;
+    position: relative;
 }
 
-#nav-bar li:not(:last-child) {
+#nav-bar button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: -10px;
+    left: 0;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+}
+
+#nav-bar button:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+}
+
+#nav-bar button:not(:last-child) {
     margin-right: 50px;
+}
+
+#nav-bar button:hover {
+    cursor: pointer;
 }
 
 

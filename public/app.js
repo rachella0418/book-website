@@ -14,6 +14,17 @@ $(document).ready(function() {
         }
     }
 
+    //NAVIGATE TO DIFFERENT PAGE 
+    $("#home-btn").click(function() {
+        window.location.replace("./main.html");
+    });
+    $("#mylib-btn").click(function() {
+        window.location.replace("./mylib.html");
+    });
+    $("#profile-btn").click(function() {
+        window.location.replace("./profile.html");
+    });
+
     // SEARCH FEATURE
     var item, title, author, cover;
     var outputList = document.getElementById("list-output");
