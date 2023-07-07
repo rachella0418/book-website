@@ -57,9 +57,24 @@
                         },
                         body: JSON.stringify(obj)
                     });
-                })
+                });
 
-                
+                signinBtn.addEventListener("click", () => {
+                    var obj = {
+                        username: username.value,
+                        password: password.value
+                    };
+
+                    fetch("/signin", {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json"
+                        },
+                        body: JSON.stringify(obj)
+                    });
+                });
+
+         
                 showPass.onclick = function() {
                     if (password.type === "password") {
                         password.type = "text";

@@ -44,12 +44,14 @@ app.post('/signup', async (req, res) => {
     }
 })
 
-app.post('/login', async (req, res) => {
+app.post('/signin', async (req, res) => {
+    console.log(req.body);
     try{
         const {username, password} = req.body;
 
         if (!username || !password){
             res.status(400).send("Username and password required");
+            console.log("username required");
         }
 
         const user = await User.findOne({username});
@@ -66,7 +68,6 @@ app.post('/login', async (req, res) => {
         }
 
         jwt.sign(payload, secretCode, {expiresIn: '10h'});
-
         res.status(200).send("Logged In!");
     }
     catch(error){
