@@ -12,13 +12,17 @@ const secretCode = config.secretCode;
 
 app.use(express.json());
 dbConnection();
+var path = require('path');
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
-    res.send('<a href="main.html">Welcome</a>');
+    res.sendFile(path.join(__dirname, '../public' + '/index.html'));
+    //res.send('<a href="main.html">Welcome</a>');
     console.log("Welcome");
 });
 
 app.post('/signup', async (req, res) => {
+    console.log(req.body);
     try{
         const {username, password} = req.body;
         const oldUser = await User.findOne({username});

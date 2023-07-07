@@ -19,10 +19,6 @@
             <div id="signup-box">
                 <h1 class="signup" id="title">Sign up</h1>
                 <form>
-                    <div class="input-field" id="email">
-                        <label for="email">Email address</label>
-                        <input type="email" name="email" id="email">
-                    </div>
                     <div class="input-field" id="usernameField">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username">
@@ -36,53 +32,39 @@
                         <label class="showpass" for="showPass">Show password</label>
                     </div>
                     <button type="button" id="signup-btn">Sign up</button>
-                </form>
-                
-                <p id="question">Already have an account?</p>
-                <form >
                     <button type="button" id="signin-btn">Sign in</button>
+
                 </form>
             </div>
 
             <script>
-                let title = document.getElementById("title");
-                let email = document.getElementById("email");
-                let signupBtn = document.getElementById("signup-btn");
-                let signinBtn = document.getElementById("signin-btn");
-                let question = document.getElementById("question");
-                let showPass = document.getElementById("showPass");
+                var signupBtn = document.getElementById("signup-btn");
+                var signinBtn = document.getElementById("signin-btn");
+                var showPass = document.getElementById("showPass");
+                var username = document.getElementById("username");
+                var password = document.getElementById("password");
 
-                var flag = true;
+                signupBtn.addEventListener("click", () => {
+                    var obj = {
+                        username: username.value,
+                        password: password.value
+                    };
 
-                signinBtn.onclick = function() {
-                    if (flag) {
-                        title.innerHTML = "Sign in"
-                        email.style.maxHeight = "0";
-                        signupBtn.innerHTML = "Sign in";
-                        question.innerHTML = "Don't have an account?"
-                        signinBtn.innerHTML = "Sign up";
-                        flag = false;
-                    } else {
-                        title.innerHTML = "Sign up"
-                        email.style.maxHeight = "60px";
-                        signupBtn.innerHTML = "Sign up";
-                        question.innerHTML = "Already have an account?"
-                        signinBtn.innerHTML = "Sign in";
-                        flag = true;
-                    }
-                    
-                }
+                    fetch("/signup", {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json"
+                        },
+                        body: JSON.stringify(obj)
+                    });
+                })
 
-                signupBtn.onclick = function() {
-                    email.style.maxHeight = "60px";
-                }
-
+                
                 showPass.onclick = function() {
-                    var input = document.getElementById("password");
-                    if (input.type === "password") {
-                        input.type = "text";
+                    if (password.type === "password") {
+                        password.type = "text";
                     } else {
-                        input.type = "password";
+                        password.type = "password";
                     }
                 }
             </script>
