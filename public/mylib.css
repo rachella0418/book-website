@@ -36,15 +36,28 @@ header {
     margin-right: 100px;
 }
 
+.logo {
+    border: none;
+    background-color: transparent;
+    background-image: url(../pictures/logo-black.png);
+    width: calc(1715px / 6);
+    height: calc(803px / 6);
+    background-position: center;
+    background-size: cover;
+    margin-right: 100px;
+}
+
 #search-bar {
     position: relative;
-    margin-left: 100px;
     border: 3px solid var(--secondary-color);
     border-radius: 30px;
     display: flex;
     align-items: center;
     padding-left: 30px;
+    margin-left: 100px;
+
 }
+
 
 .search {
     width: 250px;

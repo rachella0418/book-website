@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     //NAVIGATE TO DIFFERENT PAGE 
     let currentPage = "home";
-    $("#home-btn").click(function() {
+    $("#home-btn, #logo").click(function() {
         currentPage = "home";
         window.location.replace("./main.html");
     });
