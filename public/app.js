@@ -26,8 +26,6 @@ $(document).ready(function() {
         window.location.replace("./profile.html");
     });
 
-    
-
     // SEARCH FEATURE
     var item, title, author, cover;
     var outputList = document.getElementById("list-output");
