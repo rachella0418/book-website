@@ -17,7 +17,10 @@
                 <img class="logo" src="pictures/logo.png" alt="logo">
             </div>
             <div id="signup-box">
-                <h1 class="signup" id="title">Welcome,</h1>
+                <div id="title-div">
+                    <h1 class="signup" id="title">Welcome,</h1>
+                </div>
+                
                 <form>
                     <div class="input-field" id="usernameField">
                         <label for="username">Username</label>
@@ -43,6 +46,7 @@
                 var showPass = document.getElementById("showPass");
                 var username = document.getElementById("username");
                 var password = document.getElementById("password");
+                var title = document.getElementById("title");
 
                 signupBtn.addEventListener("click", () => {
                     var obj = {
@@ -61,10 +65,15 @@
                         if (response.status === 200) {
                             window.location.replace('main.html');
                         }
+                        if (response.status === 409) {
+                            title.style.fontSize = "28px";
+                            title.innerHTML = "Username already </br> existed, try again";
+                        }
                     }).catch(error => {
                         console.log(error);
                     });
-                    
+                    username.value = "";
+                    password.value = ""; 
                 });
 
                 signinBtn.addEventListener("click", () => {
@@ -84,9 +93,19 @@
                         if (response.status === 200) {
                             window.location.replace('main.html');
                         }
+                        if (response.status === 400) {
+                            title.style.fontSize = "28px";
+                            title.innerHTML = "Incorrect username/password,</br>try again";
+                        }
+                        if (response.status === 500) {
+                            title.style.fontSize = "28px";
+                            title.innerHTML = "User does not exist";
+                        }
                     }).catch (error => {
                         console.log(error);
-                    });        
+                    });       
+                    username.value = "";
+                    password.value = ""; 
                 });
 
          

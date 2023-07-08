@@ -23,7 +23,7 @@ body {
     margin-top: 20px;
 }
 
-h1:not(.signup) {
+h1:not(.signup, .mes) {
     font-size: 30px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -31,9 +31,12 @@ h1:not(.signup) {
     text-align: center;
 }
 
+
+
 #signup-box { 
     width: 100%;
     max-width: 350px;
+    max-height: 350px;
     position: absolute;
     top: 5%;
     left: 50%;
