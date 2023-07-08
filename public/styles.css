@@ -2,7 +2,7 @@ body {
     margin: 0;
     border: none;
     padding: 0;
-    background-image: url("../pictures/background-image.jpg");
+    background-image: url("./pictures/background-image.jpg");
     background-position: center;
     position: relative;
     color: #2f2f2f;
