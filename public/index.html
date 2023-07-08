@@ -55,7 +55,14 @@
                         headers: {
                             "Content-type": "application/json"
                         },
-                        body: JSON.stringify(obj)
+                        body: JSON.stringify(obj),
+                        redirect: 'follow'
+                    }).then(response => {
+                        if (response.status === 200) {
+                            window.location.replace('main.html');
+                        }
+                    }).catch(error => {
+                        console.log(error);
                     });
                     
                 });
@@ -74,17 +81,12 @@
                         body: JSON.stringify(obj),
                         redirect: 'follow'
                     }).then(response => {
-                        console.log("in here");
                         if (response.status === 200) {
                             window.location.replace('main.html');
                         }
                     }).catch (error => {
                         console.log(error);
-                    });
-
-                    
-                    
-                    
+                    });        
                 });
 
          
