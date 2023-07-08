@@ -17,7 +17,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public' + '/index.html'));
-    //res.send('<a href="main.html">Welcome</a>');
     console.log("Welcome");
 });
 
@@ -72,6 +71,7 @@ app.post('/signin', async (req, res) => {
     }
     catch(error){
         res.status(500).send("Logged In failed!");
+        console.log({error});
     }
 
 })

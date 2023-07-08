@@ -1,3 +1,4 @@
 PORT=3000
 MONGODB_URI=mongodb+srv://<password>:mElbPEwasm6kcVAT@cluster0.vbk9q6l.mongodb.net/
 MONGODB_PWD=mElbPEwasm6kcVAT
+JWT_SECRET_KEY=Ff0BFQl64X/nJvHNdYtI8n/oJ/P4jF/2JnNLLcSwZ+KInjDbonl+e0eHrvMl1Se5
