@@ -71,6 +71,7 @@ app.post('/signin', async (req, res) => {
         res.status(200).send("Logged In!");
     }
     catch(error){
+        console.log(error);
         res.status(500).send("Logged In failed!");
     }
 
