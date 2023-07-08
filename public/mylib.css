@@ -27,44 +27,34 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-
+    position: fixed;
+    margin-top: 70px;
+    background-color: var(--primary-color);
+    z-index: 3;
+    transition: background 1s;
 }
 
 #logo {
     width: 30%;
     float: left;
-    margin-right: 100px;
-}
-
-.logo {
-    border: none;
-    background-color: transparent;
-    background-image: url(./pictures/logo-black.png);
-    width: calc(1715px / 6);
-    height: calc(803px / 6);
-    background-position: center;
-    background-size: cover;
-    margin-right: 100px;
+    margin-right: 50px;
 }
 
 #search-bar {
-    position: relative;
+    margin-left: 50px;
     border: 3px solid var(--secondary-color);
     border-radius: 30px;
     display: flex;
     align-items: center;
     padding-left: 30px;
-    margin-left: 100px;
-
 }
 
-
 .search {
-    width: 250px;
+    width: 125px;
     background: transparent;
     border: 0;
     outline: 0;
-    padding: 18px 15px;
+    padding: 12px 10px;
     font-size: 1rem;
     color: var(--secondary-color)
 }
@@ -147,7 +137,7 @@ header {
     font-size: 25px;
     padding: 8px;
     color: var(--primary-color);
-    margin-left: 100px;
+    margin-left: 50px;
     border: 3px solid var(--secondary-color);
     border-radius: 50%;
     color: var(--secondary-color);
@@ -159,6 +149,7 @@ header {
     background-color: var(--secondary-color);
     color: var(--primary-color);
 }
+
 /* -------- SEARCH RESULT -------- */
 
 .book-list {
