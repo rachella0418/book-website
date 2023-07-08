@@ -28,9 +28,7 @@ header {
     flex-direction: row;
     align-items: center;
     position: fixed;
-    margin-top: 70px;
     background-color: var(--primary-color);
-    z-index: 3;
     transition: background 1s;
 }
 
@@ -65,11 +63,10 @@ header {
     padding: 10px;
     font-family: "Playfair Display", sans-serif;
     font-size: 1rem;
-    background-color: var(--primary-color);
+    background-color: transparent;
     color: var(--secondary-color);
     border: 2px solid var(--secondary-color);
     border-radius: 30px;
-    transition: background, 0.3s;
 }
 
 #search-btn:hover {
@@ -154,7 +151,7 @@ header {
 
 .book-list {
     visibility: hidden;
-    margin-top: -100px;
+    margin-top: 70px;
 }
 
 #row {
@@ -163,8 +160,8 @@ header {
 }
 
 #col {
-    flex: 20%;
-    max-width: 20%;
+    flex: 33%;
+    max-width: 30%;
     margin-bottom: 10px;
 }
 
@@ -177,7 +174,6 @@ header {
 }
 
 #book-about {
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -225,7 +221,6 @@ header {
     display: block;
     justify-content: center;
     visibility: visible;
-    margin-top: 70px;
     margin-left: 10px;
 }
 
@@ -233,5 +228,4 @@ header {
     width: 15%;
     max-width: 15%;
     margin-left: 50px;
-    margin-top: 50px
 }

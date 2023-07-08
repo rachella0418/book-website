@@ -159,8 +159,8 @@ header {
 }
 
 #col {
-    flex: 20%;
-    max-width: 20%;
+    flex: 33%;
+    max-width: 30%;
     margin-bottom: 10px;
 }
 

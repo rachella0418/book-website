@@ -86,7 +86,7 @@ $(document).ready(function() {
     }
 
     function displayResults(res) {
-        for (var i = 0; i < res.items.length; i += 4) {
+        for (var i = 0; i < res.items.length; i += 3) {
             var row = '<div id="row">'
             item1 = res.items[i];
             title1 = item1.volumeInfo.title;
@@ -108,14 +108,6 @@ $(document).ready(function() {
                 cover3 = (item3.volumeInfo.imageLinks) ? item3.volumeInfo.imageLinks.thumbnail : placeholder;
                 row += formatOutput(cover3, title3, author3);
 
-            }
-            
-            if (res.items[i + 3] != null) {
-                item4 = res.items[i+3];
-                title4 = item4.volumeInfo.title;
-                author4 = item4.volumeInfo.authors;
-                cover4 = (item4.volumeInfo.imageLinks) ? item4.volumeInfo.imageLinks.thumbnail : placeholder;
-                row += formatOutput(cover4, title4, author4);
             }
 
             row += '</div>';
