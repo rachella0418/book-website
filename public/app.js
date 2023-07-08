@@ -55,7 +55,6 @@ $(document).ready(function() {
         }
         $(".book-list").css("visibility", "visible");
         $("#search-message").css("visibility", "hidden");
-        $(".book-list").css("margin-top", "0");
         outputList.innerHTML = "";
         //document.body.style.backgroundImage - "url('')";
         searchData = $(".search").val();
