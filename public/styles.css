@@ -17,10 +17,11 @@ body {
 }
 
 .logo {
-    width: 25%;
-    min-width: 500px;
+    width: 30%;
+    min-width: 600px;
     justify-content: center;
-    margin-top: 20px;
+    display: flex;
+    float: left;
 }
 
 h1:not(.signup, .mes) {
@@ -32,15 +33,13 @@ h1:not(.signup, .mes) {
 }
 
 
-
 #signup-box { 
     width: 100%;
     max-width: 350px;
-    max-height: 350px;
-    position: absolute;
-    top: 5%;
+    max-height: 250px;
+    position: relative;
     left: 50%;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 0);
     background-color: #f9f7f1;
     padding: 100px 0 100px 100px;
     border-radius: 5px;
