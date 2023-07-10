@@ -1,19 +1,22 @@
 const express = require ('express');
 const config = require('./config/config');
-const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const dbConnection = require('./config/db');
 const jwt = require('jsonwebtoken');
 const User = require('./model/userModel');
+const isAuthenticate = require('./auth');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = config.port;
 const secretCode = config.secretCode;
 
+app.use(cookieParser());
 app.use(express.json());
 dbConnection();
 var path = require('path');
 app.use(express.static(path.join(__dirname, '../public')));
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public' + '/index.html'));
@@ -44,7 +47,6 @@ app.post('/signup', async (req, res) => {
 })
 
 app.post('/signin', async (req, res) => {
-    console.log(req.body);
     try{
         const {username, password} = req.body;
 
@@ -66,8 +68,8 @@ app.post('/signin', async (req, res) => {
             password: user.password,
         }
 
-        jwt.sign(payload, secretCode, {expiresIn: '10h'});
-        res.status(200).send("Logged In!");
+        const token = jwt.sign(payload, secretCode, {expiresIn: '10h'});
+        return res.cookie('token', token).json({success:true,message:'LoggedIn Successfully'});
     }
     catch(error){
         console.log({error});
@@ -75,6 +77,20 @@ app.post('/signin', async (req, res) => {
     }
 
 })
+
+app.get('/user', isAuthenticate, async (req, res) => {
+    try{
+        const user = req.user;
+        if (!user){
+            res.status(404).send('No user found');
+        }
+
+        return res.json({user});
+    }
+    catch(error){
+        return res.json({error});
+    }
+});
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
