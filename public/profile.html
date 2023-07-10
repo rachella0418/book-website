@@ -50,13 +50,35 @@
                     </div>
                     <div id="info-div">
                         <label for="password">Password:</label>
-                        <input type="password" id="username">
+                        <input type="password" id="password">
                     </div>
                     <button id="change-pw">Change password</button>
                     <button id="signout">Sign out</button>
                 </div>
             </section>
         </body>
+        <script>
+            var username = document.getElementById("username");
+            var name = document.getElementById("name");
+            var password = document.getElementById("password");
+            var signoutBtn = document.getElementById("signout");
+
+            fetch("/user", {
+                method: "GET",
+                headers: { "Content-type": "application/json" },
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                console.log(data.user);
+                username.value = data.user.username;
+                password.value = data.user.password;
+            })
+
+            signoutBtn.addEventListener("click", () => {
+                
+            })
+
+        </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="app.js"> </script>
         <script src="profile.js"></script>

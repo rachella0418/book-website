@@ -15,6 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 dbConnection();
 var path = require('path');
+const userModel = require('./model/userModel');
 app.use(express.static(path.join(__dirname, '../public')));
 
 
@@ -84,7 +85,6 @@ app.get('/user', isAuthenticate, async (req, res) => {
         if (!user){
             res.status(404).send('No user found');
         }
-
         return res.json({user});
     }
     catch(error){
