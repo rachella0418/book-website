@@ -1,0 +1,67 @@
+/* -------- SEARCH RESULT -------- */
+
+.book-list {
+    visibility: hidden;
+    padding-top: 70px;
+}
+
+#row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#col {
+    flex: 33%;
+    max-width: 30%;
+    margin-bottom: 10px;
+}
+
+#col img {
+    margin-top: 8px;
+    margin-left: 50px;
+    float: left;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#book-about {
+    display: flex;
+    flex-direction: column;
+}
+
+#book-about span {
+    margin-bottom: 10px;
+}
+
+#search-res {
+    margin-left: 50px;
+    font-size: 35px;
+}
+
+#search-message {
+    margin-left: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.book-author {
+    font-style: italic;
+}
+
+#add-option {
+    background-color: var(--primary-color);
+    padding: 10px;
+    font-family: "Playfair Display", sans-serif;
+    font-weight: 600;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+}
+
+.book-cover {
+    width: 150px;
+    margin-right: 30px;
+}
+
+.book-title {
+    font-weight: bold;
+}
