@@ -25,8 +25,8 @@
                 
                 <form id="formToFill">
                     <div class="input-field" id="usernameField">
-                        <label for="name" id="name-label">Name:</label>
-                        <input type="text" name="name" id="name">
+                        <label for="fullname" id="name-label">Name:</label>
+                        <input type="text" name="fullname" id="fullname">
                     </div>
                     <div class="input-field" id="usernameField">
                         <label for="username">Username:</label>
@@ -58,7 +58,7 @@
                 var backBtn = document.getElementById("back");
                 var showPass = document.getElementById("showPass");
                 var nameLabel = document.getElementById("name-label");
-                var name = document.getElementById("name");
+                var fullname = document.getElementById("fullname");
                 var username = document.getElementById("username");
                 var password = document.getElementById("password");
                 var title = document.getElementById("title");
@@ -67,7 +67,7 @@
                     document.getElementById("greeting").innerHTML = "Create Account";
                     hideTypeOfUser();
                     signinBtn.style.display = "none";
-                    name.style.display = "inline";
+                    fullname.style.display = "inline";
                     nameLabel.style.display = "inline";
                 }
 
@@ -96,8 +96,9 @@
                     var obj = {
                         username: username.value,
                         password: password.value,
-                        name: name.value
+                        name: fullname.value
                     };
+
 
                     fetch("/signup", {
                         method: "POST",
@@ -119,7 +120,7 @@
                     });
                     username.value = "";
                     password.value = ""; 
-                    name.value = "";
+                    fullname.value = "";
                 });
 
                 signinBtn.addEventListener("click", () => {
