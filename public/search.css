@@ -48,13 +48,23 @@
     font-style: italic;
 }
 
-#add-option {
+#add-option, #rating-option {
     background-color: var(--primary-color);
     padding: 10px;
     font-family: "Playfair Display", sans-serif;
     font-weight: 600;
     border: 1px solid var(--secondary-color);
     border-radius: 8px;
+    font-size: 15px;
+}
+
+#add-option {
+    margin-bottom: 10px;
+}
+
+.fa-star {
+    color: var(--secondary-color);
+    font-size: 1rem;
 }
 
 .book-cover {
