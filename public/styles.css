@@ -4,13 +4,13 @@ body {
     padding: 0;
     background-image: url("./pictures/background-image.jpg");
     background-position: center;
-    position: relative;
     color: #2f2f2f;
     font-family: 'Playfair Display', sans-serif;
-    font-size: 1rem;
+    position: fixed;
 }
 
 #header {
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,93 @@ body {
     float: left;
 }
 
-h1:not(.signup, .mes) {
+#window {
+    position: relative;
+    width: 400px;
+    height: auto;
+    display: table;
+    text-align: center;
+    margin: auto;
+    background: #f9f7f1;
+    border-radius: 8px;
+}
+
+
+h1 {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+button {
+    font-family: "Playfair Display", sans-serif;
+    font-size: 15px;
+    background-color: transparent;
+    border: 3px solid #2f2f2f;
+    border-radius: 20px;
+    padding: 5px 10px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #2f2f2f;
+    color: #f9f7f1;
+}
+
+#returning-user {
+    margin-left: 20px;
+    margin-bottom: 80px;
+}
+
+#formToFill {
+    display: none;
+}
+
+.input-field {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#name {
+    margin-left: 40px;
+    display: inline;
+}
+
+input {
+    font-size: 15px;
+    font-family: "Playfair Display", sans-serif;
+    margin-left: 10px;
+    background-color: transparent;
+    border: 2px solid #2f2f2f;
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+.showpass-field {
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+#signup-btn, #signin-btn {
+    position: relative;
+    float: right;
+    margin-right: 60px;
+    margin-bottom: 50px;
+}
+
+input[type=checkbox] {
+    accent-color: #2f2f2f;
+}
+
+#back {
+    border: none;
+    text-decoration: underline;
+    float:left;
+    margin-left: 50px;
+}
+
+/*h1:not(.signup, .mes) {
     font-size: 30px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -112,7 +198,7 @@ button:hover {
 
 
 
-/*label {
+label {
     margin-bottom: 10px;
 }
 
@@ -137,4 +223,5 @@ button:hover {
     font-weight: bold;
     background-color: #2f2f2f;
     color: #f9f7f1
-}*/
+}
+*/

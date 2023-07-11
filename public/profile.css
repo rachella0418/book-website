@@ -30,6 +30,7 @@ input {
     background-color: transparent;
     border: none;
     pointer-events: none;
+    font-family: "Playfair Display", sans-serif;
 }
 
 #info-div {
@@ -51,6 +52,7 @@ button {
 button:hover {
     background-color: var(--secondary-color);
     color: var(--primary-color);
+    cursor: pointer;
 }
 
 

@@ -16,18 +16,24 @@
             <div id="header">
                 <img class="logo" src="pictures/inline.png" alt="logo">
             </div>
-            <div id="signup-box">
-                <div id="title-div">
-                    <h1 class="signup" id="title">Welcome,</h1>
+            <div id="window">
+                <h1 id="greeting">Welcome!</h1>
+                <div id="type-of-user">
+                    <button id="new-user">New User</button>
+                    <button id="returning-user">Returning User</button>
                 </div>
                 
-                <form>
+                <form id="formToFill">
                     <div class="input-field" id="usernameField">
-                        <label for="username">Username</label>
+                        <label for="name" id="name-label">Name:</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+                    <div class="input-field" id="usernameField">
+                        <label for="username">Username:</label>
                         <input type="text" name="username" id="username">
                     </div>
                     <div class="input-field">
-                        <label for="password">Password</label>
+                        <label for="password">Password:</label>
                         <input type="password" name="password" id="password"> 
                     </div>
                     <div class="showpass-field">
@@ -36,17 +42,57 @@
                     </div>
                     <button type="button" id="signup-btn">Sign up</button>
                     <button type="button" id="signin-btn">Sign in</button>
+                    <button id="back">Back</button>
 
                 </form>
+
             </div>
 
-            <script>
+            <script type="text/javascript">
+                var newuserBtn = document.getElementById("new-user");
+                var returninguserBtn = document.getElementById("returning-user");
+                var formToFill = document.getElementById("formToFill");
+                var portal = document.getElementById("window");
                 var signupBtn = document.getElementById("signup-btn");
                 var signinBtn = document.getElementById("signin-btn");
+                var backBtn = document.getElementById("back");
                 var showPass = document.getElementById("showPass");
+                var nameLabel = document.getElementById("name-label");
+                var name = document.getElementById("name");
                 var username = document.getElementById("username");
                 var password = document.getElementById("password");
                 var title = document.getElementById("title");
+
+                newuserBtn.onclick = function() {
+                    document.getElementById("greeting").innerHTML = "Create Account";
+                    hideTypeOfUser();
+                    signinBtn.style.display = "none";
+                    name.style.display = "inline";
+                    nameLabel.style.display = "inline";
+                }
+
+                returninguserBtn.onclick = function() {
+                    document.getElementById("greeting").innerHTML = "Welcome Back";
+                    hideTypeOfUser();
+                    signupBtn.style.display = "none";
+                    document.getElementById("name").style.display = "none";
+                    nameLabel.style.display = "none";
+                }
+
+                backBtn.onclick = function() {
+                    document.getElementById("greeting").innerHTML = "Welcome!";
+                    formToFill.style.display = "none";
+                    newuserBtn.style.display = "inline";
+                    returninguserBtn.style.display = "inline";
+                }
+
+                function hideTypeOfUser() {
+                    newuserBtn.style.display = "none";
+                    returninguserBtn.style.display = "none";
+                    formToFill.style.display = 'inline';
+                }
+
+                
 
                 signupBtn.addEventListener("click", () => {
                     var obj = {
