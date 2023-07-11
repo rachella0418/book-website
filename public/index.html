@@ -92,12 +92,11 @@
                     formToFill.style.display = 'inline';
                 }
 
-                
-
                 signupBtn.addEventListener("click", () => {
                     var obj = {
                         username: username.value,
-                        password: password.value
+                        password: password.value,
+                        name: name.value
                     };
 
                     fetch("/signup", {
@@ -120,6 +119,7 @@
                     });
                     username.value = "";
                     password.value = ""; 
+                    name.value = "";
                 });
 
                 signinBtn.addEventListener("click", () => {

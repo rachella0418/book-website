@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 app.post('/signup', async (req, res) => {
     console.log(req.body);
     try{
-        const {username, password} = req.body;
+        const {username, password, name} = req.body;
         const oldUser = await User.findOne({username});
         if (oldUser){
             res.status(409).send("Username already existed");
@@ -38,7 +38,9 @@ app.post('/signup', async (req, res) => {
         await User.create({
             username,
             password: encryptedPwd,
+            name,
         });
+        
         res.status(200).send("Sign up successfully!");
     }
     catch(error){
