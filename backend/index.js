@@ -35,13 +35,22 @@ app.post('/signup', async (req, res) => {
         }
 
         const encryptedPwd = await bcrypt.hash(password, 10);
-        await User.create({
+        const user = await User.create({
             username,
             password: encryptedPwd,
             name,
+            pwLength: password.length
         });
-        
-        res.status(200).send("Sign up successfully!");
+
+        const payload = {
+            username: user.username,
+            password: user.password,
+            name: user.name,
+            pwLength: user.pwLength
+        }
+        const token = jwt.sign(payload, secretCode, {expiresIn: '10h'});
+        return res.cookie('token', token).json({success:true,message:'Signed Up Successfully'});
+        //res.status(200).send("Sign up successfully!");
     }
     catch(error){
         res.status(500).send("Sign up failed");
@@ -70,9 +79,8 @@ app.post('/signin', async (req, res) => {
             username: user.username,
             password: user.password,
         }
-
-        const token = jwt.sign(payload, secretCode, {expiresIn: '10h'});
-        return res.cookie('token', token).json({success:true,message:'LoggedIn Successfully'});
+        res.status(200).send("Sign in successfully!");
+        
     }
     catch(error){
         console.log({error});

@@ -61,10 +61,10 @@
                 var fullname = document.getElementById("fullname");
                 var username = document.getElementById("username");
                 var password = document.getElementById("password");
-                var title = document.getElementById("title");
+                var title = document.getElementById("greeting");
 
                 newuserBtn.onclick = function() {
-                    document.getElementById("greeting").innerHTML = "Create Account";
+                    title.innerHTML = "Create Account";
                     hideTypeOfUser();
                     signinBtn.style.display = "none";
                     fullname.style.display = "inline";
@@ -72,15 +72,15 @@
                 }
 
                 returninguserBtn.onclick = function() {
-                    document.getElementById("greeting").innerHTML = "Welcome Back";
+                    title.innerHTML = "Welcome Back";
                     hideTypeOfUser();
                     signupBtn.style.display = "none";
-                    document.getElementById("name").style.display = "none";
+                    fullname.style.display = "none";
                     nameLabel.style.display = "none";
                 }
 
                 backBtn.onclick = function() {
-                    document.getElementById("greeting").innerHTML = "Welcome!";
+                    title.innerHTML = "Welcome!";
                     formToFill.style.display = "none";
                     newuserBtn.style.display = "inline";
                     returninguserBtn.style.display = "inline";
@@ -99,7 +99,6 @@
                         name: fullname.value
                     };
 
-
                     fetch("/signup", {
                         method: "POST",
                         headers: {
@@ -112,7 +111,6 @@
                             window.location.replace('main.html');
                         }
                         if (response.status === 409) {
-                            title.style.fontSize = "28px";
                             title.innerHTML = "Username already </br> existed, try again";
                         }
                     }).catch(error => {
@@ -141,11 +139,9 @@
                             window.location.replace('main.html');
                         }
                         if (response.status === 400) {
-                            title.style.fontSize = "28px";
                             title.innerHTML = "Incorrect username/password,</br>try again";
                         }
                         if (response.status === 500) {
-                            title.style.fontSize = "28px";
                             title.innerHTML = "User does not exist";
                         }
                     }).catch (error => {

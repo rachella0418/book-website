@@ -59,7 +59,7 @@
         </body>
         <script>
             var username = document.getElementById("username");
-            var name = document.getElementById("name");
+            var fullname = document.getElementById("name");
             var password = document.getElementById("password");
             var signoutBtn = document.getElementById("signout");
 
@@ -70,8 +70,10 @@
                 return response.json();
             }).then(data => {
                 console.log(data.user);
+                fullname.value = data.user.name;
                 username.value = data.user.username;
-                password.value = data.user.password;
+                var temp = '.'.repeat(data.user.pwLength);
+                password.value = temp;
             })
 
             signoutBtn.addEventListener("click", () => {
