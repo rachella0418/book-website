@@ -16,6 +16,7 @@ app.use(express.json());
 dbConnection();
 var path = require('path');
 const userModel = require('./model/userModel');
+const { log } = require('console');
 app.use(express.static(path.join(__dirname, '../public')));
 
 
@@ -27,11 +28,10 @@ app.get('/', (req, res) => {
 app.post('/signup', async (req, res) => {
     console.log(req.body);
     try{
-        const {username, password, name} = req.body;
+        const {username, password, name, avatar} = req.body;
         const oldUser = await User.findOne({username});
         if (oldUser){
             res.status(409).send("Username already existed");
-            return;
         }
 
         const encryptedPwd = await bcrypt.hash(password, 10);
@@ -39,7 +39,8 @@ app.post('/signup', async (req, res) => {
             username,
             password: encryptedPwd,
             name,
-            pwLength: password.length
+            pwLength: password.length,
+            avatar
         });
 
         const payload = {
@@ -64,7 +65,7 @@ app.post('/signin', async (req, res) => {
 
         if (!username || !password){
             res.status(400).send("Username and password required");
-            console.log("username required");
+            return;
         }
 
         const user = await User.findOne({username});
@@ -79,8 +80,9 @@ app.post('/signin', async (req, res) => {
             username: user.username,
             password: user.password,
         }
-        res.status(200).send("Sign in successfully!");
-        
+
+        const token = jwt.sign(payload, secretCode, {expiresIn: '10h'});
+        return res.cookie('token', token).json({success:true,message:'Signed In Successfully'});
     }
     catch(error){
         console.log({error});
@@ -101,6 +103,43 @@ app.get('/user', isAuthenticate, async (req, res) => {
         return res.json({error});
     }
 });
+
+app.post('/update', isAuthenticate, async (req, res) => {
+    try{
+        const user = req.user;
+        const {currentPassword, newPassword, newUsername, newAvatar} = req.body;
+
+        if (currentPassword && newPassword){
+            const isCorrectPassword = await bcrypt.compare(currentPassword, user.password);
+
+            if (!isCorrectPassword){
+                res.status(400).send('Wrong current password');
+                return;
+            }
+
+            const encryptedPwd = await bcrypt.hash(newPassword, 10);
+            await User.findOneAndUpdate({username: user.username}, {
+                password: encryptedPwd,
+                pwLength: newPassword.length,
+            });
+            res.status(200).send('Change password successful');
+        }
+
+        if (newUsername){
+            await User.findOneAndUpdate({username: user.username}, {username: newUsername});
+            res.status(200).send('Change username successful');
+        }
+
+        if (newAvatar){
+            await User.findOneAndUpdate({username: user.username}, {avatar: newAvatar});
+            res.status(200).send('Change avatar successful');
+        }
+    }
+    catch(error){
+        console.log({error});
+        return res.json({error});
+    }
+})
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

@@ -16,6 +16,11 @@ const userSchema = new mongoose.Schema({
     },
     pwLength: {
         type: Number,
+        required: true,
+    },
+    avatar: {
+        type: String,
+        required: false,
     }
 });
 
