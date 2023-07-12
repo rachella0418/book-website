@@ -11,6 +11,9 @@ var cancelPwBtn = document.getElementById("cancel-pw");
 var newPwField = document.getElementById("new-pw-field");
 var newPassword = document.getElementById("new-pw");
 var btnDiv = document.getElementById("btn-div");
+var popup = document.getElementById("popup-background");
+var popupMessage = document.getElementById("popup-message");
+var closeBtn = document.getElementById("close-btn");
 
 // GET USER
 fetch("/user", {
@@ -52,6 +55,7 @@ submitUsernameBtn.onclick = function() {
             disableEditMode(username, submitUsernameBtn, cancelUsernameBtn);
             console.log("username changed");
         } else if (response.status === 400) {
+            popupWindow("Username already existed, please try again");
             console.log("username already existed");
         }
     }).catch(error => {
@@ -95,6 +99,9 @@ submitPwBtn.onclick = function() {
         if (response.status === 200) {
             disableEditMode(password, submitPwBtn, cancelPwBtn);
             console.log("password changed");
+        } else if (response.status === 400) {
+            popupWindow("You've entered the wrong password, please try again");
+            console.log("current password is incorrect");
         }
     }).catch(error => {
         console.log("error");
@@ -114,6 +121,15 @@ function disableEditMode(variable, submit, cancel) {
     newPassword.value = "";
     newPwField.style.visibility = "hidden";
     btnDiv.style.marginTop = "-30px";
+}
+
+function popupWindow(message) {
+    popup.style.display = "inline";
+    popupMessage.innerHTML = message;
+}
+
+closeBtn.onclick = function() {
+    popup.style.display = "none";
 }
 
 // SIGN OUT
