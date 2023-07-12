@@ -41,46 +41,30 @@
                 <img class="profile-pic" src="pictures/profile-pic.png" alt="">
                 <div id="personal-info">
                     <div id="info-div">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name">
+                        <label id="info-label" for="name">Name:</label>
+                        <input type="text" id="name" class="info-input">
                     </div>
                     <div id="info-div">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username">
+                        <label id="info-label" for="username">Username:</label>
+                        <input type="text" id="username" class="info-input">
+                        <button id="submit-username" class="info-btn">Submit</button>
+                        <button id="cancel-username" class="info-btn">Cancel</button>
                     </div>
                     <div id="info-div">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password">
+                        <label id="info-label" for="password">Password:</label>
+                        <input type="password" id="password" class="info-input">
+                        <button id="submit-pw" class="info-btn">Submit</button>
+                        <button id="cancel-pw" class="info-btn">cancel</button>
                     </div>
-                    <button id="change-pw">Change password</button>
-                    <button id="signout">Sign out</button>
+                    <div id="info-div">
+                        <button id="change-username" class="info-btn">Change username</button>
+                        <button id="change-pw" class="info-btn">Change password</button>
+                    </div>
+                    <button id="signout" class="info-btn">Sign out</button>
                 </div>
             </section>
         </body>
-        <script>
-            var username = document.getElementById("username");
-            var fullname = document.getElementById("name");
-            var password = document.getElementById("password");
-            var signoutBtn = document.getElementById("signout");
-
-            fetch("/user", {
-                method: "GET",
-                headers: { "Content-type": "application/json" },
-            }).then(response => {
-                return response.json();
-            }).then(data => {
-                console.log(data.user);
-                fullname.value = data.user.name;
-                username.value = data.user.username;
-                var temp = '.'.repeat(data.user.pwLength);
-                password.value = temp;
-            })
-
-            signoutBtn.addEventListener("click", () => {
-                
-            })
-
-        </script>
+        <script src="profile.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="app.js"> </script>
         <script src="profile.js"></script>

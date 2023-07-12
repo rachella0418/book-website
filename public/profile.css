@@ -20,26 +20,25 @@
     margin-left: -200px;
 }
 
-label {
+#info-label {
     font-weight: bold;
     font-size: 20px;
 }
 
-input {
-    font-size: 20px;
+.info-input {
+    width: 150px;
+    margin-bottom: 10px;
+    padding-left: 10px;
     background-color: transparent;
     border: none;
-    pointer-events: none;
+    border-radius: 8px;
+    font-size: 20px;
     font-family: "Playfair Display", sans-serif;
     color: var(--secondary-color);
+    pointer-events: none;
 }
 
-#info-div {
-    margin-bottom: 20px;
-}
-
-button {
-    margin-bottom: 10px;
+.info-btn {
     font-size: 18px;
     font-family: "Playfair Display", sans-serif;
     color: var(--secondary-color);
@@ -48,12 +47,17 @@ button {
     border: 3px solid var(--secondary-color);
     border-radius: 20px;
     transition: background 0.3s;
+    margin-bottom: 10px;
 }
 
-button:hover {
+.info-btn:hover {
     background-color: var(--secondary-color);
     color: var(--primary-color);
     cursor: pointer;
+}
+
+#submit-username, #submit-pw, #cancel-username, #cancel-pw {
+    visibility: hidden;
 }
 
 
