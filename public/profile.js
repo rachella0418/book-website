@@ -8,8 +8,9 @@ var changePwBtn = document.getElementById("change-pw");
 var changeUsernameBtn = document.getElementById("change-username");
 var cancelUsernameBtn = document.getElementById("cancel-username");
 var cancelPwBtn = document.getElementById("cancel-pw");
-var currPassword;
-var currUsername;
+var newPwField = document.getElementById("new-pw-field");
+var newPassword = document.getElementById("new-pw");
+var btnDiv = document.getElementById("btn-div");
 
 // GET USER
 fetch("/user", {
@@ -20,8 +21,6 @@ fetch("/user", {
 }).then(data => {
     fullname.value = data.user.name;
     username.value = data.user.username;
-    currPassword = data.user.password;
-    currUsername = data.user.username;
     var temp = '.'.repeat(data.user.pwLength);
     password.value = temp;
 })
@@ -67,17 +66,22 @@ cancelUsernameBtn.addEventListener("click", () => {
 
 // CHANGE PASSWORD BUTTON
 changePwBtn.addEventListener("click", () => {
+    password.value = "";
     password.style.pointerEvents = "all";
     password.style.border = "3px solid";
+    newPassword.style.pointerEvents = "all";
+    newPassword.style.border = "3px solid";
     submitPwBtn.style.visibility = "visible";
     cancelPwBtn.style.visibility = "visible";
+    newPwField.style.visibility = "visible";
+    btnDiv.style.marginTop = "0";
 })
 
 // SUBMIT NEW PASSWORD
 submitPwBtn.onclick = function() {
     var obj = {
-        currentPassword: currPassword,
-        newPassword: password.value,
+        currentPassword: password.value,
+        newPassword: newPassword.value,
         newUsername: "",
         newAvatar: "",
     };
@@ -96,28 +100,6 @@ submitPwBtn.onclick = function() {
         console.log("error");
     })
 }
-/*submitPwBtn.addEventListener("click", () => {
-    var obj = {
-        currentPassword: currPassword,
-        newPassword: password.value,
-        newUsername: "",
-        newAvatar: "",
-    };
-    fetch("/update", {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(obj)
-    }).then (response => {
-        if (response.status === 200) {
-            disableEditMode(password, submitPwBtn, cancelPwBtn);
-            console.log("password changed");
-        }
-    }).catch(error => {
-        console.log("error");
-    })
-})*/
 
 // CANCEL CHANGING PASSWORD
 cancelPwBtn.addEventListener("click", () => {
@@ -129,6 +111,9 @@ function disableEditMode(variable, submit, cancel) {
     variable.style.border = "none";
     submit.style.visibility = "hidden";
     cancel.style.visibility = "hidden";
+    newPassword.value = "";
+    newPwField.style.visibility = "hidden";
+    btnDiv.style.marginTop = "-30px";
 }
 
 // SIGN OUT

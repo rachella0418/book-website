@@ -56,8 +56,10 @@
     cursor: pointer;
 }
 
-#submit-username, #submit-pw, #cancel-username, #cancel-pw {
+#submit-username, #submit-pw, #cancel-username, #cancel-pw, #new-pw-field {
     visibility: hidden;
 }
 
-
+#btn-div {
+    margin-top: -30px;
+}
