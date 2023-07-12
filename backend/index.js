@@ -126,8 +126,15 @@ app.post('/update', isAuthenticate, async (req, res) => {
         }
 
         if (newUsername){
-            await User.findOneAndUpdate({username: user.username}, {username: newUsername});
-            res.status(200).send('Change username successful');
+            const isExistedUsername = await User.findOne({username: newUsername});
+
+            if (!isExistedUsername){
+                await User.findOneAndUpdate({username: user.username}, {username: newUsername});
+                res.status(200).send('Change username successful');
+            }
+            else{
+                res.status(400).send('Existed username');
+            }
         }
 
         if (newAvatar){
