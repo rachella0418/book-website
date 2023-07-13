@@ -44,13 +44,11 @@ $(document).ready(function() {
     });
 
     
-
     function search() {
-        console.log(window.location.href);
-        if (window.location.href === "http://127.0.0.1:5500/public/main.html") {
+        if (window.location.pathname === "/main.html") {
             $("#mylib-field").css("visibility", "hidden");
             $("#topread-field").css("visibility", "hidden");
-        } else if (window.location.href === "http://127.0.0.1:5500/public/profile.html") {
+        } else if (window.location.pathname === "/profile.html") {
             $('#profile-field').css("visibility", "hidden");
         }
         $(".book-list").css("visibility", "visible");

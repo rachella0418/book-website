@@ -10,6 +10,7 @@ var submitPwBtn = document.getElementById("submit-pw");
 var changeUsernameBtn = document.getElementById("change-username");
 var cancelUsernameBtn = document.getElementById("cancel-username");
 var cancelPwBtn = document.getElementById("cancel-pw");
+var currPw;
 // NEW PASSWORD POP UP
 var newPwField = document.getElementById("new-pw-field");
 var newPassword = document.getElementById("new-pw");
@@ -34,6 +35,7 @@ fetch("/user", {
     fullname.value = data.user.name;
     username.value = data.user.username;
     var temp = '.'.repeat(data.user.pwLength);
+    currPw = temp;
     password.value = temp;
 })
 
@@ -162,6 +164,7 @@ function disableEditMode(variable, submit, cancel) {
     cancel.style.visibility = "hidden";
     newPassword.value = "";
     newPwField.style.visibility = "hidden";
+    password.value = currPw;
     btnDiv.style.marginTop = "-30px";
 }
 
