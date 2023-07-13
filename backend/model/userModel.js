@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         required: false,
+    },
+    books: {
+        type: [Number],
+        required: false,
     }
 });
 

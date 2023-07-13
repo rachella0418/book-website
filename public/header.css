@@ -41,6 +41,10 @@ header {
     margin-right: 50px;
 }
 
+#logo:hover {
+    cursor: pointer;
+}
+
 #search-bar {
     margin-left: 50px;
     border: 3px solid var(--secondary-color);
@@ -133,7 +137,7 @@ header {
     margin-right: 10px;
 }
 
-#dark-mode {
+#dark-btn, #light-btn {
     font-size: 25px;
     padding: 8px;
     color: var(--primary-color);
@@ -145,7 +149,11 @@ header {
     transition: background 0.3s;
 }
 
-#dark-mode:hover {
+#dark-btn:hover, #light-btn:hover {
     background-color: var(--secondary-color);
     color: var(--primary-color);
+}
+
+#light-btn {
+    display: none;
 }

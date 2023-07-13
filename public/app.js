@@ -1,16 +1,34 @@
 $(document).ready(function() {
     // DARK MODE
-    let mode = document.getElementById("dark-mode");
-    let logo = document.getElementById("logo");
-    mode.onclick = function() {
-        document.body.classList.toggle("dark")
-        if (document.body.classList.contains("dark")) {
-            logo.src = "pictures/inline.png";
-        } else {
-            logo.src = "pictures/inline-black.png";
-        }
+    var logo = document.getElementById("logo");
+    var currentMode;
+    if (localStorage.getItem("mode")) {
+        currentMode = localStorage.getItem("mode");
+    } else {
+        currentMode = "light";
     }
-
+    localStorage.setItem("mode", currentMode);
+    if (localStorage.getItem("mode") == "dark") {
+        $("body").addClass("dark");
+        $("#dark-btn").css("display", "none");
+        $("#light-btn").css("display", "inline");
+        logo.src = "pictures/inline.png";
+    }
+    $("#dark-btn").on("click", function() {
+        $("#dark-btn").css("display", "none");
+        $("#light-btn").css("display", "inline");
+        $("body").addClass("dark");
+        logo.src = "pictures/inline.png";
+        localStorage.setItem("mode", "dark");
+    })
+    $("#light-btn").on("click", function() {
+        $("#light-btn").css("display", "none");
+        $("#dark-btn").css("display", "inline");
+        $("body").removeClass("dark");
+        logo.src = "pictures/inline-black.png";
+        localStorage.setItem("mode", "light");
+    })
+    
     //NAVIGATE TO DIFFERENT PAGE 
     let currentPage = "home";
     $("#home-btn, #logo").click(function() {
@@ -21,10 +39,11 @@ $(document).ready(function() {
         currentPage = "mylib";
         window.location.replace("./mylib.html");
     });
-    $("#profile-btn").click(function() {
+    $("#profile-btn").click(function() { 
         currentPage = "profile";
         window.location.replace("./profile.html");
     });
+
 
     // SEARCH FEATURE
     var item, title, author, cover;

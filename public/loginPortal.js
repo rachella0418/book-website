@@ -12,12 +12,15 @@ var username = document.getElementById("username");
 var password = document.getElementById("password");
 var title = document.getElementById("greeting");
 
+var isSigningup = false;
+
 newuserBtn.onclick = function() {
     title.innerHTML = "Create Account";
     hideTypeOfUser();
     signinBtn.style.display = "none";
     fullname.style.display = "inline";
     nameLabel.style.display = "inline";
+    isSigningup = true;
 }
 
 returninguserBtn.onclick = function() {
@@ -33,6 +36,7 @@ backBtn.onclick = function() {
     formToFill.style.display = "none";
     newuserBtn.style.display = "inline";
     returninguserBtn.style.display = "inline";
+    isSigningup = false;
 }
 
 function hideTypeOfUser() {
