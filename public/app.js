@@ -5,9 +5,9 @@ $(document).ready(function() {
     mode.onclick = function() {
         document.body.classList.toggle("dark")
         if (document.body.classList.contains("dark")) {
-            logo.src = "pictures/inline.png"
+            logo.src = "pictures/inline.png";
         } else {
-            logo.src = "pictures/inline-black.png"
+            logo.src = "pictures/inline-black.png";
         }
     }
 

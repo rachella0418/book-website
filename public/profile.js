@@ -1,19 +1,28 @@
+//USER INFORMATION
 var username = document.getElementById("username");
 var fullname = document.getElementById("name");
-var submitUsernameBtn = document.getElementById("submit-username");
 var password = document.getElementById("password");
-var submitPwBtn = document.getElementById("submit-pw");
+// BUTTONS FOR EDITING USER INFORMATION
 var signoutBtn = document.getElementById("signout");
 var changePwBtn = document.getElementById("change-pw");
+var submitUsernameBtn = document.getElementById("submit-username");
+var submitPwBtn = document.getElementById("submit-pw");
 var changeUsernameBtn = document.getElementById("change-username");
 var cancelUsernameBtn = document.getElementById("cancel-username");
 var cancelPwBtn = document.getElementById("cancel-pw");
+// NEW PASSWORD POP UP
 var newPwField = document.getElementById("new-pw-field");
 var newPassword = document.getElementById("new-pw");
 var btnDiv = document.getElementById("btn-div");
+// POPUP
 var popup = document.getElementById("popup-background");
 var popupMessage = document.getElementById("popup-message");
 var closeBtn = document.getElementById("close-btn");
+// CHANGING PROFILE PICTURE
+var profileDiv = document.getElementById("ava-div");
+var profilePic = document.getElementById("profile-pic");
+var choosePic = document.getElementById("choose-ava");
+
 
 // GET USER
 fetch("/user", {
@@ -26,6 +35,39 @@ fetch("/user", {
     username.value = data.user.username;
     var temp = '.'.repeat(data.user.pwLength);
     password.value = temp;
+})
+
+// CHANGE PROFILE PICTURE
+choosePic.addEventListener("change", function() {
+    var picChosen = this.files[0];
+    if (picChosen) {
+        console.log(picChosen.name);
+        if (response.status === 200) {
+            reader.addEventListener("load", function() {
+                profilePic.style.backgroundImage = "url(" + reader.result + ")";
+            })
+            reader.readAsDataURL(picChosen);  
+        }
+    };
+    /*var obj = {
+        currentPassword: "",
+        newPassword: "",
+        newUsername: "",
+        newAvatar: picChosen.name,
+    };
+    fetch("/update", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then (response => {
+        const reader = new FileReader();
+        
+    }).catch (error => {
+        console.log("error");
+    });*/
+    
 })
 
 // CHANGE USERNAME BUTTON
