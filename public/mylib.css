@@ -1,0 +1,65 @@
+#libraries-field {
+    margin-top: -100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: var(--secondary-color);
+    
+}
+
+
+#libraries-field button {
+    font-family: "Playfair Display", sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    border: none;
+    padding: 0;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    transition: background 1s;
+    position: relative;
+}
+
+#libraries-field button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: -5px;
+    left: 0;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+}
+
+#libraries-field button:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+}
+
+#libraries-field button:hover {
+    cursor: pointer;
+}
+
+.shelf {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.fa-angle-right {
+    font-size: 50px;
+    margin-top: 90px;
+    margin-left: 20px;
+    color: var(--secondary-color);
+}
+
+.fa-angle-right:hover {
+    cursor: pointer;
+}
+
+
