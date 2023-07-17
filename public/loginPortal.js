@@ -13,6 +13,8 @@ var password = document.getElementById("password");
 var title = document.getElementById("greeting");
 
 var isSigningup = false;
+var isSigningin = false;
+
 
 newuserBtn.onclick = function() {
     title.innerHTML = "Create Account";
@@ -29,6 +31,7 @@ returninguserBtn.onclick = function() {
     signupBtn.style.display = "none";
     fullname.style.display = "none";
     nameLabel.style.display = "none";
+    isSigningin = true;
 }
 
 backBtn.onclick = function() {
@@ -37,6 +40,7 @@ backBtn.onclick = function() {
     newuserBtn.style.display = "inline";
     returninguserBtn.style.display = "inline";
     isSigningup = false;
+    isSigningin = false;
 }
 
 function hideTypeOfUser() {
@@ -44,6 +48,19 @@ function hideTypeOfUser() {
     returninguserBtn.style.display = "none";
     formToFill.style.display = 'inline';
 }
+
+password.addEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+        event.preventDefault();
+        console.log("enter hit");
+        if (isSigningup) {
+            signupBtn.click();
+        }
+        if (isSigningin) {
+            signinBtn.click();
+        }
+    }
+})
 
 signupBtn.addEventListener("click", () => {
     var obj = {
@@ -60,6 +77,7 @@ signupBtn.addEventListener("click", () => {
         body: JSON.stringify(obj),
         redirect: 'follow'
     }).then(response => {
+        console.log(response.status);
         if (response.status === 200) {
             window.location.replace('../main.html');
         }

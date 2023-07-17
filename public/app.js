@@ -151,7 +151,6 @@ $(document).ready(function() {
         return card;
     }
 
-    var library = document.getElementById("add-option");
 
 
 });
