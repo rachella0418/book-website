@@ -76,3 +76,18 @@
 .book-title {
     font-weight: bold;
 }
+
+#rating {
+    color: var(--secondary-color);
+    background: transparent;
+    font-family: "Playfair Display", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+}
+
+#rating::placeholder {
+    color: var(--secondary-color);
+}

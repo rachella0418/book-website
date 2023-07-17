@@ -43,13 +43,12 @@ fetch("/user", {
 choosePic.addEventListener("change", function() {
     var picChosen = this.files[0];
     if (picChosen) {
+        const reader = new FileReader();
         console.log(picChosen.name);
-        if (response.status === 200) {
-            reader.addEventListener("load", function() {
-                profilePic.style.backgroundImage = "url(" + reader.result + ")";
-            })
-            reader.readAsDataURL(picChosen);  
-        }
+        reader.addEventListener("load", function() {
+            profilePic.style.backgroundImage = "url(" + reader.result + ")";
+        })
+        reader.readAsDataURL(picChosen);  
     };
     /*var obj = {
         currentPassword: "",
@@ -179,5 +178,17 @@ closeBtn.onclick = function() {
 
 // SIGN OUT
 signoutBtn.addEventListener("click", () => {
-    
+    fetch("/logout", {
+        method: "PUT",
+        headers: {
+            "Content-type": "application/json"
+        },
+        redirect: 'follow'
+    }).then(response => {
+        if (response.status === 200) {
+            window.location.replace('../index.html');
+        }
+    }).catch(error => {
+        console.log(error);
+    });
 })

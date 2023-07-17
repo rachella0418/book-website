@@ -145,18 +145,14 @@ $(document).ready(function() {
                                 <option value="TBR">Currently Reading</option>
                                 <option value="TBR">Want To Read</option>
                             </select>
-                            <select id="rating-option">
-                                <option value="Select">Rating</option>
-                                <option value="1">1<i class="fa-solid fa-star"></i></option>
-                                <option value="2">2<i class="fa-solid fa-star"></i></option>
-                                <option value="3">3<i class="fa-solid fa-star"></i></option>
-                                <option value="4">4<i class="fa-solid fa-star"></i></option>
-                                <option value="5">5<i class="fa-solid fa-star"></i></option>
-                            </select>
+                            <input type="number" id="rating" min="1" max="5" step="0.5" placeholder="Rating">
                         </div>  
                     </div>`
         return card;
     }
+
+    var library = document.getElementById("add-option");
+
 
 });
 
