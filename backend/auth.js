@@ -15,6 +15,10 @@ const isAuthenticate = async (req, res, next) => {
         next();
     }
     catch(error){
+        if (error.name == 'TokenExpiredError'){
+            res.status(404).send('Please login');
+            return;
+        }
         return next(error);
     }
 }

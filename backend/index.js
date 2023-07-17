@@ -101,6 +101,9 @@ app.get('/user', isAuthenticate, async (req, res) => {
         return res.json({user});
     }
     catch(error){
+        if (error.name == 'TokenExpiredError'){
+            res.status(404).send('Please login');
+        }
         return res.json({error});
     }
 });
@@ -153,11 +156,16 @@ app.post('/update', isAuthenticate, async (req, res) => {
     }
 });
 
-app.get('/logout', isAuthenticate, (req, res) => {
+app.put('/logout', isAuthenticate, (req, res) => {
     try{
-        const {token} = req.cookies;
-        res.clearCookie({token});
-        res.status(200).send('Logout successful');
+        const user = req.user;
+        const payload = {
+            username: user.username,
+            password: user.password,
+        }
+
+        const token = jwt.sign(payload, secretCode, {expiresIn: 1});
+        return res.cookie('token', token).json({success:true,message:'Log out Successfully'});
     }
     catch(error){
         console.log({error});
