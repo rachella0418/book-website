@@ -146,6 +146,18 @@ app.post('/update', isAuthenticate, async (req, res) => {
         console.log({error});
         return res.json({error});
     }
+});
+
+app.get('/logout', isAuthenticate, (req, res) => {
+    try{
+        const {token} = req.cookies;
+        res.clearCookie({token});
+        res.status(200).send('Logout successful');
+    }
+    catch(error){
+        console.log({error});
+        res.send(500).send('Logout unsuccessful');
+    }
 })
 
 app.listen(port, () => {
