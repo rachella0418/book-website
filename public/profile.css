@@ -1,3 +1,4 @@
+
 /* -------- profile -------- */
 
 #profile-field {
@@ -7,9 +8,49 @@
     margin-left: 10px;
 }
 
-.profile-pic {
-    width: 25%;
-    max-width: 25%;
+#ava-div {
+    width: 250px;
+    height: 250px;
+    justify-content: center;
+    margin-right: 20px;
+    
+}
+
+#choose-ava {
+    display: none;
+}
+
+#choose-ava-label {
+    display: block;
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: 3px solid var(--secondary-color);
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#choose-ava-label:hover {
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+#choose-ava-label:visited {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+#profile-pic {
+    background-image: url("./pictures/background-image.jpg");
+    height: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
 }
 
 #personal-info {
@@ -20,26 +61,25 @@
     margin-left: -200px;
 }
 
-label {
+#info-label {
     font-weight: bold;
     font-size: 20px;
 }
 
-input {
-    font-size: 20px;
+.info-input {
+    width: 150px;
+    margin-bottom: 10px;
+    padding-left: 10px;
     background-color: transparent;
     border: none;
-    pointer-events: none;
+    border-radius: 8px;
+    font-size: 20px;
     font-family: "Playfair Display", sans-serif;
     color: var(--secondary-color);
+    pointer-events: none;
 }
 
-#info-div {
-    margin-bottom: 20px;
-}
-
-button {
-    margin-bottom: 10px;
+.info-btn {
     font-size: 18px;
     font-family: "Playfair Display", sans-serif;
     color: var(--secondary-color);
@@ -48,12 +88,66 @@ button {
     border: 3px solid var(--secondary-color);
     border-radius: 20px;
     transition: background 0.3s;
+    margin-bottom: 10px;
 }
 
-button:hover {
+.info-btn:hover {
     background-color: var(--secondary-color);
     color: var(--primary-color);
     cursor: pointer;
 }
 
+#submit-username, #submit-pw, #cancel-username, #cancel-pw, #new-pw-field {
+    visibility: hidden;
+}
+
+#btn-div {
+    margin-top: -30px;
+}
+
+#popup-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    display: none;
+}
+
+#popup-window {
+    background-color: var(--secondary-color);
+    position: absolute;
+    top: 40%;
+    right: 35%;
+    width: 400px;
+    height: 200px;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 50%);
+}
+
+#popup-window h2 {
+    color: var(--primary-color);
+    font-size: 18px;
+    position: absolute;
+    text-align: center;
+    padding: 30px;
+}
+
+#close-btn {
+    color: var(--primary-color);
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+#close-btn:hover {
+    cursor: pointer;
+}
 

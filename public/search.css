@@ -50,6 +50,7 @@
 
 #add-option, #rating-option {
     background-color: var(--primary-color);
+    color: var(--secondary-color);
     padding: 10px;
     font-family: "Playfair Display", sans-serif;
     font-weight: 600;

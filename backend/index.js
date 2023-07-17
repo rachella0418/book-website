@@ -96,6 +96,7 @@ app.get('/user', isAuthenticate, async (req, res) => {
         const user = req.user;
         if (!user){
             res.status(404).send('No user found');
+            return;
         }
         return res.json({user});
     }
@@ -123,6 +124,7 @@ app.post('/update', isAuthenticate, async (req, res) => {
                 pwLength: newPassword.length,
             });
             res.status(200).send('Change password successful');
+            return;
         }
 
         if (newUsername){
@@ -131,15 +133,18 @@ app.post('/update', isAuthenticate, async (req, res) => {
             if (!isExistedUsername){
                 await User.findOneAndUpdate({username: user.username}, {username: newUsername});
                 res.status(200).send('Change username successful');
+                return;
             }
             else{
                 res.status(400).send('Existed username');
+                return;
             }
         }
 
         if (newAvatar){
             await User.findOneAndUpdate({username: user.username}, {avatar: newAvatar});
             res.status(200).send('Change avatar successful');
+            return;
         }
     }
     catch(error){
