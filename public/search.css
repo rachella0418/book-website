@@ -48,6 +48,7 @@
     font-style: italic;
 }
 
+
 #add-option, #rating-option {
     background-color: var(--primary-color);
     color: var(--secondary-color);

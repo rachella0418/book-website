@@ -109,13 +109,13 @@ $(document).ready(function() {
             title1 = item1.volumeInfo.title;
             author1 = item1.volumeInfo.authors;
             cover1 = (item1.volumeInfo.imageLinks) ? item1.volumeInfo.imageLinks.thumbnail : placeholder;
-            row += formatOutput(cover1, title1, author1);
+            row += formatOutput(cover1, title1, author1, item1.id);
             if (res.items[i + 1] != null) {
                 item2 = res.items[i+1];
                 title2 = item2.volumeInfo.title;
                 author2 = item2.volumeInfo.authors;
                 cover2 = (item2.volumeInfo.imageLinks) ? item2.volumeInfo.imageLinks.thumbnail : placeholder;
-                row += formatOutput(cover2, title2, author2);
+                row += formatOutput(cover2, title2, author2, item2.id);
             }
             
             if (res.items[i + 2] != null) {
@@ -123,8 +123,7 @@ $(document).ready(function() {
                 title3 = item3.volumeInfo.title;
                 author3 = item3.volumeInfo.authors;
                 cover3 = (item3.volumeInfo.imageLinks) ? item3.volumeInfo.imageLinks.thumbnail : placeholder;
-                row += formatOutput(cover3, title3, author3);
-
+                row += formatOutput(cover3, title3, author3, item3.id);
             }
 
             row += '</div>';
@@ -133,23 +132,26 @@ $(document).ready(function() {
         }
     }
 
-    function formatOutput(cover, title, author) {
+    function formatOutput(cover, title, author, id) {
         var card = `<div id="col">
                         <img class="book-cover" src="${cover}">
                         <div id="book-about">
                             <span class="book-title">${title}</span>
                             <span class="book-author">${author}</span>
-                            <select id="add-option">
+                            <select onchange="addToLib(this)" id="add-option" class="${id}">
                                 <option value="Select">Select</option>
                                 <option value="Read">Read</option>
-                                <option value="TBR">Currently Reading</option>
+                                <option value="Reading">Currently Reading</option>
                                 <option value="TBR">Want To Read</option>
                             </select>
-                            <input type="number" id="rating" min="1" max="5" step="0.5" placeholder="Rating">
+                            <input type="name" id="rating" min="1" max="5" step="0.5" placeholder="Rating">
                         </div>  
                     </div>`
         return card;
     }
+
+    
+
 
 
 
