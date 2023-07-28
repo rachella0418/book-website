@@ -173,6 +173,23 @@ app.put('/logout', isAuthenticate, (req, res) => {
     }
 })
 
+app.post('/search', async(req, res) => {
+    console.log(req.body);
+    try {
+        const {username, id} = req.body;
+
+        await User.findOneAndUpdate( 
+            {username: username},
+            {$addToSet: {books: id}}
+        )
+        res.status(200).send('Added to Library');
+    }
+    catch (error) {
+        console.log({error});
+        res.send(500).send("Error adding to library");
+    }
+});
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 })

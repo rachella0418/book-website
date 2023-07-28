@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         required: false,
     },
     books: {
-        type: [Number],
+        type: [String],
         required: false,
     }
 });
