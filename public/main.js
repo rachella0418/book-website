@@ -16,9 +16,8 @@ function addToLib(x) {
         id: x.className,
         library: x.value  
     };
-    
     console.log(x.className);
-    fetch('/search', {
+    fetch('/addToLib', {
         method: "POST",
         headers: {
             "Content-type": "application/json"

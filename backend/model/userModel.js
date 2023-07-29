@@ -22,7 +22,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    books: {
+    haveRead: {
+        type: [String],
+        required: false,
+    },
+    currentlyReading: {
+        type: [String],
+        required: false,
+    },
+    toBeRead: {
         type: [String],
         required: false,
     }

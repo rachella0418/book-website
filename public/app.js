@@ -141,8 +141,8 @@ $(document).ready(function() {
                             <select onchange="addToLib(this)" id="add-option" class="${id}">
                                 <option value="Select">Select</option>
                                 <option value="Read">Read</option>
-                                <option value="Reading">Currently Reading</option>
-                                <option value="TBR">Want To Read</option>
+                                <option value="Currently Reading">Currently Reading</option>
+                                <option value="To Be Read">To Be Read</option>
                             </select>
                             <input type="name" id="rating" min="1" max="5" step="0.5" placeholder="Rating">
                         </div>  

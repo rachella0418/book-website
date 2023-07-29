@@ -173,15 +173,51 @@ app.put('/logout', isAuthenticate, (req, res) => {
     }
 })
 
-app.post('/search', async(req, res) => {
+app.post('/addToLib', async(req, res) => {
     console.log(req.body);
     try {
-        const {username, id} = req.body;
+        const {username, id, library} = req.body;
 
-        await User.findOneAndUpdate( 
-            {username: username},
-            {$addToSet: {books: id}}
-        )
+        if (library == "Read") {
+            await User.findOneAndUpdate( 
+                {username: username},
+                {$addToSet: {haveRead: id}}
+            )
+            await User.findOneAndUpdate( 
+                {username: username},
+                {$pull: {currentlyReading: id}},
+            )
+            await User.findOneAndUpdate( 
+                {username: username},
+                {$pull: {toBeRead: id}},
+            )
+        } else if (library == "Currently Reading") {
+            await User.findOneAndUpdate( 
+                {username: username},
+                {$addToSet: {currentlyReading: id}}
+            )
+            await User.findOneAndUpdate( 
+                {username: username},
+                {$pull: {haveRead: id}},
+            )
+            await User.findOneAndUpdate(
+                {username: username},
+                {$pull: {toBeRead: id}},
+            )
+        } else if (library == "To Be Read") {
+            await User.findOneAndUpdate(
+                {username: username},
+                {$addToSet: {toBeRead: id}},
+            )
+            await User.findOneAndUpdate( 
+                {username: username},
+                {$pull: {haveRead: id}},
+            )
+            await User.findOneAndUpdate(
+                {username: username},
+                {$pull: {currentlyReading: id}},
+            )
+        }    
         res.status(200).send('Added to Library');
     }
     catch (error) {
