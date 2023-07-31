@@ -7,7 +7,6 @@ fetch("/user", {
     return response.json();
 }).then(data => {
     username = data.user.username;
-    console.log(username);
 })
 
 function addToLib(x) {
@@ -16,7 +15,6 @@ function addToLib(x) {
         id: x.className,
         library: x.value  
     };
-    console.log(x.className);
     fetch('/addToLib', {
         method: "POST",
         headers: {

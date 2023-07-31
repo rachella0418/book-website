@@ -226,6 +226,9 @@ app.post('/addToLib', async(req, res) => {
     }
 });
 
+app.get('/library', async(req, res) => {
+
+})
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 })
