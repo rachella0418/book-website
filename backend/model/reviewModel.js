@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-    author: {
+    username: {
+        type: String,
+        required: true,
+    },
+    bookid: {
         type: String,
         required: true,
     },
     content: {
         type: String,
-        required: true,
-    },
-    book: {
-        type: Number,
         required: true,
     },
     upvotes: {
