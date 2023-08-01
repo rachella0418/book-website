@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const dbConnection = require('./config/db');
 const jwt = require('jsonwebtoken');
 const User = require('./model/userModel');
+const Review = require('./model/reviewModel');
 const isAuthenticate = require('./auth');
 const cookieParser = require('cookie-parser');
 
@@ -226,8 +227,20 @@ app.post('/addToLib', async(req, res) => {
     }
 });
 
-app.get('/library', async(req, res) => {
-
+app.post('/review', async(req, res) => {
+    try{
+        const {author, content, book} = req.body;
+        const review = await Review.create({
+            author,
+            content,
+            book,
+        })
+        return res.status(200).send('review added successful');
+    }
+    catch(error){
+        console.log({error});
+        return res.status(500).send('error added successful');
+    }
 })
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
