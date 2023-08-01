@@ -49,7 +49,7 @@ $(document).ready(function() {
     var item, title, author, cover;
     var outputList = document.getElementById("list-output");
     var url = "https://www.googleapis.com/books/v1/volumes?q=";
-    var placeholder = '../pictures/coverexample.jpg';
+    var placeholder = './pictures/coverexample.jpg';
     var searchData;
 
     $(".search").keyup(function (event) {
@@ -133,7 +133,7 @@ $(document).ready(function() {
     }
 
     function formatOutput(cover, title, author, id) {
-        var card = `<div id="col">
+        var card = `<div id="col" onclick="openPage(this)" class="${id}">
                         <img class="book-cover" src="${cover}">
                         <div id="book-about">
                             <span class="book-title">${title}</span>

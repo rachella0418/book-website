@@ -11,7 +11,6 @@ var fullname = document.getElementById("fullname");
 var username = document.getElementById("username");
 var password = document.getElementById("password");
 var title = document.getElementById("greeting");
-
 var isSigningup = false;
 var isSigningin = false;
 
