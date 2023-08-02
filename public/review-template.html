@@ -107,12 +107,39 @@
 
             </section>
             
-            <div id="popup-background">
+            <form id="popup-background">
                 <div id="popup-window">
                     <button id="close-btn"><i class="fa-solid fa-xmark"></i></button>
-                    <h2 id="popup-message">Message</h2>
+                    <h1 id="popup-message">Write a review</h1>
+
+                    <div id="dropdowns">
+                        <label class="rating-label" for="rating-dropdown">Rating:</label>
+                        <select id="rating-dropdown" >
+                            <option value="Select">Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label class="lib-label" for="library-dropdown">Add to:</label>
+                        <select id="library-dropdown" >
+                            <option value="Library">Library</option>
+                            <option value="Read">Read</option>
+                            <option value="Currently Reading">Currently Reading</option>
+                            <option value="To Be Read">To Be Read</option>
+                        </select>
+                        
+                    </div>
+                    <div id="new-review">
+                        <label for="review-box">What did you think?</label>
+                        <textarea id="review-box" cols="83" rows="10" placeholder="write your review"></textarea>
+                    </div>
+                    <button id="submit-btn">Submit</button>
+
+                    
                 </div>
-            </div>
+            </form>
         </body>
         <script>
             /*document.getElementById("show-more-btn").onclick = function() {

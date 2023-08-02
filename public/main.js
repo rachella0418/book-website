@@ -24,14 +24,20 @@ function addToLib(x) {
     }) 
 }
 
+var outputList = document.getElementById("list-output");
+var title, author, cover, summary;
+var outputList = document.getElementById("list-output");
+var url = "https://www.googleapis.com/books/v1/volumes/";
+var placeholder = './pictures/coverexample.jpg';
+
 function openPage(x) {
     console.log(x);
-    var title, author, cover, summary;
-    var outputList = document.getElementById("list-output");
-    var url = "https://www.googleapis.com/books/v1/volumes/";
-    var placeholder = './pictures/coverexample.jpg';
+    //var title, author, cover, summary;
+    //var outputList = document.getElementById("list-output");
+    //var url = "https://www.googleapis.com/books/v1/volumes/";
+    //var placeholder = './pictures/coverexample.jpg';
     document.getElementById("search-res").style.display = "none";
-    var outputList = document.getElementById("list-output");
+    //var outputList = document.getElementById("list-output");
     outputList.innerHTML = "";
     //document.body.style.backgroundImage - "url('')";
     $.ajax( {
@@ -76,14 +82,51 @@ function openPage(x) {
                                         <option value="To Be Read">To Be Read</option>
                                     </select>
                                     <div id="write-review-div">
-                                        <button id="write-review-btn">Write a review</button>
+                                        <button id="write-review-btn" onclick="showReviewWindow()">Write a review</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>`
+                    </section>
+                    <form id="popup-background">
+                        <div id="popup-window">
+                            <button id="close-btn" onclick="closeReviewWindow()"><i class="fa-solid fa-xmark"></i></button>
+                            <h1 id="popup-message">Write a review</h1>
+                            <div id="dropdowns">
+                                <label class="rating-label" for="rating-dropdown">Rating:</label>
+                                <select id="rating-dropdown" >
+                                    <option value="Select">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <label class="lib-label" for="library-dropdown">Add to:</label>
+                                <select id="library-dropdown" >
+                                    <option value="Library">Library</option>
+                                    <option value="Read">Read</option>
+                                    <option value="Currently Reading">Currently Reading</option>
+                                    <option value="To Be Read">To Be Read</option>
+                                </select>
+                            </div>
+                            <div id="new-review">
+                                <label for="review-box">What did you think?</label>
+                                <textarea id="review-box" cols="83" rows="10" placeholder="write your review"></textarea>
+                            </div>
+                            <button id="submit-btn">Submit</button>
+                        </div>
+                    </form>`
         return card;
     }
+}
+
+function showReviewWindow() {
+    $("#popup-background").css("display", "inline");
+}
+
+function closeReviewWindow() {
+    $("#popup-background").css("display", "none");
 }
 
 
