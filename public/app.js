@@ -90,6 +90,7 @@ $(document).ready(function() {
                         $("#search-message").css("visibility", "visible");
                     } else {
                         $(".book-list").css("visibility", "visible");
+                        
                         displayResults(res);
                     }
                 },
@@ -136,8 +137,8 @@ $(document).ready(function() {
         var card = `<div id="col">
                         <img id="book-cover" class="${id}" src="${cover}" onclick="openPage(this.className)" >
                         <div id="book-about">
-                            <span class="book-title" onclick="openPage(this.className)" class="${id}">${title}</span>
-                            <span class="book-author" onclick="openPage(this.className)" class="${id}">${author}</span>
+                            <span id="book-title" class="${id}" onclick="openPage(this.className)">${title}</span>
+                            <span id="book-author" class="${id}" onclick="openPage(this.className)">${author}</span>
                             <select onchange="addToLib(this)" id="add-option" class="${id}">
                                 <option value="Select">Select</option>
                                 <option value="Read">Read</option>

@@ -29,7 +29,7 @@
 
 #book-info {
     color: var(--secondary-color);
-    margin-top: 100px;
+    margin-top: 80px;
     margin-left: 40px;
     display: flex;
     flex-direction: column;
@@ -51,11 +51,34 @@
 }
 
 .summary {
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  margin-top: -10px;
+  max-height: 150px;
+  max-width: 400px;
+  white-space: wrap;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  float: left;
+  word-wrap: break-word;
+}
+
+#show-more-btn {
+    background-color: transparent;
+    font-family: "Playfair Display", sans-serif;
+    font-size: 15px;
+    padding: 0;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.fa-solid {
+    padding-left: 5px;
+}
+
+
+#show-more-btn:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .rating-label, .lib-label {
@@ -64,7 +87,7 @@
     margin-right: 10px;
 }
 
-.dropdown {
+#rating-dropdown, #library-dropdown {
     color: var(--secondary-color);
     background: transparent;
     font-family: "Playfair Display", sans-serif;
@@ -79,15 +102,15 @@
     margin-right: 10px;
 }
 
-#library {
+#library-dropdown {
     margin-right: -50px;
 }
 
-.dropdown::placeholder {
+#rating-dropdown::placeholder, #library-dropdown::placeholder {
     color: var(--secondary-color);
 }
 
-.dropdown:hover {
+#rating-dropdown:hover, #library-dropdown:hover {
     cursor: pointer;
     background: var(--secondary-color);
     color: var(--primary-color);
@@ -184,4 +207,50 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+}
+
+#popup-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    display: none;
+}
+
+#popup-window {
+    background-color: var(--secondary-color);
+    position: absolute;
+    top: 40%;
+    right: 35%;
+    width: 400px;
+    height: 200px;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 50%);
+}
+
+#popup-window h2 {
+    color: var(--primary-color);
+    font-size: 18px;
+    position: absolute;
+    text-align: center;
+    padding: 30px;
+}
+
+#close-btn {
+    color: var(--primary-color);
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+#close-btn:hover {
+    cursor: pointer;
 }

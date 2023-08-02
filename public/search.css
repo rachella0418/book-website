@@ -44,7 +44,7 @@
     font-weight: 600;
 }
 
-.book-author {
+#book-author {
     font-style: italic;
 }
 
@@ -75,7 +75,7 @@
     margin-right: 30px;
 }
 
-.book-title {
+#book-title {
     font-weight: bold;
 }
 

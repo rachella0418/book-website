@@ -40,10 +40,18 @@
                             <h2 class="author">T.J. Klune</h2>
                             <p class="summary">Ox was twelve when his daddy taught him a very valuable lesson. He said that Ox wasn’t worth anything and people would never understand him. Then he left.
                                 Ox was sixteen when he met the boy on the road, the boy who talked and talked and talked. Ox found out later the boy hadn’t spoken in almost two years before that day, and that the boy belonged to a family who had moved into the house at the end of the lane.
-                                Ox was seventeen when he found out the boy’s secret, and it painted the world around him in colours of red and orange and violet.
+                                Ox was seventeen when he found out the boy’s secret, asfdasfasddfasdfasdfsafasfdasfsafasdfdasfasdfsadfadsf sldfjlasjf kljalk fjdslkj flajf ;l asjl;fja;l fjnd it painted the world around him in colours of red and orange and violet.
                             </p>
+                            <!--
+                                <div>
+                                <button id="show-more-btn">Show more
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            -->
+                            
                             <label class="rating-label" for="rating-dropdown">Rating:</label>
-                            <select id="rating-dropdown" class="dropdown">
+                            <select id="rating-dropdown" >
                                 <option value="Select">Select</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -51,8 +59,8 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <label class="lib-label" for="library">Add to:</label>
-                            <select id="library" class="dropdown">
+                            <label class="lib-label" for="library-dropdown">Add to:</label>
+                            <select id="library-dropdown" >
                                 <option value="Library">Library</option>
                                 <option value="Read">Read</option>
                                 <option value="Currently Reading">Currently Reading</option>
@@ -65,8 +73,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="divider"></div>
                 
                 <div id="review-field">
                     <div id="profile-div">
@@ -101,8 +107,21 @@
 
             </section>
             
-
+            <div id="popup-background">
+                <div id="popup-window">
+                    <button id="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                    <h2 id="popup-message">Message</h2>
+                </div>
+            </div>
         </body>
+        <script>
+            /*document.getElementById("show-more-btn").onclick = function() {
+                var summary = document.getElementsByClassName("summary");
+                console.log("HI");
+                $("#book-info").css("margin-top", 250);
+                $(".summary").height("250");
+            }*/
+        </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="app.js"> </script>
     </main>
