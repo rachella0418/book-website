@@ -34,10 +34,9 @@ function openPage(x) {
     outputList.innerHTML = "";
     //document.body.style.backgroundImage - "url('')";
     $.ajax( {
-        url: url + x.className,
+        url: url + x,
         dataType: "json",
         success: function(res) {
-            console.log("BOOKINFO");
             console.log(res);
             title = res.volumeInfo.title;
             author = res.volumeInfo.authors;
@@ -60,18 +59,27 @@ function openPage(x) {
                                         Ox was sixteen when he met the boy on the road, the boy who talked and talked and talked. Ox found out later the boy hadnt spoken in almost two years before that day, and that the boy belonged to a family who had moved into the house at the end of the lane.
                                         Ox was seventeen when he found out the boys secret, and it painted the world around him in colours of red and orange and violet.
                                     </p>
-                                    <label class="rating-label" for="rating">Rating:</label>
-                                    <select id="rating" class="dropdown">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
+                                    <label class="rating-label" for="rating-dropdown">Rating:</label>
+                                <select id="rating-dropdown" class="dropdown">
+                                    <option value="Select">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <label class="lib-label" for="library">Add to:</label>
+                                <select id="library" class="dropdown">
+                                    <option value="Library">Library</option>
+                                    <option value="Read">Read</option>
+                                    <option value="Currently Reading">Currently Reading</option>
+                                    <option value="To Be Read">To Be Read</option>
+                                </select>
+                                <div id="write-review-div">
+                                    <button id="write-review-btn">Write a review</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="divider"></div>
                     </section>`
         return card;
     }

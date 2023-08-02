@@ -133,11 +133,11 @@ $(document).ready(function() {
     }
 
     function formatOutput(cover, title, author, id) {
-        var card = `<div id="col" onclick="openPage(this)" class="${id}">
-                        <img class="book-cover" src="${cover}">
+        var card = `<div id="col">
+                        <img id="book-cover" class="${id}" src="${cover}" onclick="openPage(this.className)" >
                         <div id="book-about">
-                            <span class="book-title">${title}</span>
-                            <span class="book-author">${author}</span>
+                            <span class="book-title" onclick="openPage(this.className)" class="${id}">${title}</span>
+                            <span class="book-author" onclick="openPage(this.className)" class="${id}">${author}</span>
                             <select onchange="addToLib(this)" id="add-option" class="${id}">
                                 <option value="Select">Select</option>
                                 <option value="Read">Read</option>
