@@ -178,9 +178,19 @@ app.put('/logout', isAuthenticate, (req, res) => {
 app.post('/addToLib', async(req, res) => {
     console.log(req.body);
     try {
-        const {username, id, library} = req.body;
-
-        if (library == "Read") {
+        const {username, bookid, library} = req.body;
+        const isExisted = await Rating.findOne({username: username, bookid: bookid});
+        if (isExisted) {
+            await Rating.findOneAndUpdate({username, bookid}, {library: library})
+        } else {
+            await Rating.create( {
+                username,
+                bookid,
+                rating: "",
+                library
+            })
+        }
+        /*if (library == "Read") {
             await User.findOneAndUpdate( 
                 {username: username},
                 {$addToSet: {haveRead: id}}
@@ -220,13 +230,25 @@ app.post('/addToLib', async(req, res) => {
                 {$pull: {currentlyReading: id}},
             )
         }    
-        res.status(200).send('Added to Library');
+        res.status(200).send('Added to Library');*/
     }
     catch (error) {
         console.log({error});
         res.send(500).send("Error adding to library");
     }
 });
+
+app.post('/getLibrary', async(req, res) => {
+    try {
+        const {username, bookid} = req.body;
+        const library = await Rating.findOne({username: username, bookid: bookid});
+        return res.json({library});
+    }
+    catch (error) {
+        console.log({error});
+        return res.status(500).send('error added successful');
+    }
+})
 
 app.post('/review', async(req, res) => {
     try{
@@ -244,7 +266,7 @@ app.post('/review', async(req, res) => {
     }
 })
 
-app.post('/rating', async(req, res) => {
+app.post('/setRating', async(req, res) => {
     try  {
         const {username, bookid, rating} = req.body;
         const alreadyRated = await Rating.findOne({username: username, bookid: bookid});
@@ -259,6 +281,18 @@ app.post('/rating', async(req, res) => {
         }
     }
     catch (error) {
+        console.log({error});
+        return res.status(500).send('error added successful');
+    }
+})
+
+app.post('/getRating', async(req, res) => {
+    try{
+        const {username, bookid} = req.body;
+        const rating = await Rating.findOne({username: username, bookid: bookid});
+        return res.json({rating});
+    }
+    catch(error){
         console.log({error});
         return res.status(500).send('error added successful');
     }

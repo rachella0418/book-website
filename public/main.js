@@ -12,7 +12,7 @@ fetch("/user", {
 function addToLib(x) {
     var obj = {
         username: username,
-        id: x.className,
+        bookid: x.className,
         library: x.value  
     };
     fetch('/addToLib', {
@@ -22,8 +22,33 @@ function addToLib(x) {
         },
         body: JSON.stringify(obj)
     }).then(response => {
-        console.log(response.status);
+        if (response.status == 200) {
+            console.log("Book added to library successfully");
+        } else {
+            console.log("Error adding book to library");
+        }
     }) 
+}
+
+function getLibrary(bookid) {
+    var obj = {
+        username: username,
+        bookid: bookid
+    };
+    fetch('/getLibrary', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        console.log(data.library);
+        if (data.library.library != null) {
+            document.getElementById("library-dropdown").value = data.library.library;
+        }
+    })
 }
 
 function rateBook(x) {
@@ -32,14 +57,38 @@ function rateBook(x) {
         bookid: x.className,
         rating: x.value
     };
-    fetch('/rating', {
+    fetch('/setRating', {
         method: "POST",
         headers: {
             "Content-type": "application/json"
         },
         body: JSON.stringify(obj)
     }).then(response => {
-        console.log(response.status);
+        if (response.status == 200) {
+            console.log("Rating added successfully");
+        } else {
+            console.log("Error adding rating");
+        }
+    })
+}
+
+function getRating(bookid) {
+    var obj = {
+        username: username,
+        bookid: bookid,
+    };
+    fetch('/getRating', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        if (data.rating.rating != null) {
+            document.getElementById("rating-dropdown").value = data.rating.rating;
+        }
     })
 }
 
@@ -62,7 +111,7 @@ function openPage(x) {
             author = res.volumeInfo.authors;
             cover = (res.volumeInfo.imageLinks) ? res.volumeInfo.imageLinks.thumbnail : placeholder;
             summary = res.volumeInfo.description;
-            summary = summary.replace("<p><b>", "");            
+            summary = summary.replace("<p><b>", "");     
             outputList.innerHTML += formatOutput(x, title, author, cover, summary);
         }
     });
@@ -106,7 +155,7 @@ function openPage(x) {
                             <h1 id="popup-message">Write a review</h1>
                             <div id="dropdowns">
                                 <label class="rating-label" for="rating-dropdown">Rating:</label>
-                                <select id="rating-dropdown" >
+                                <select id="rating-dropdown" class="${id}" onchange="rateBook(this)">
                                     <option value="Select">Select</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -115,7 +164,7 @@ function openPage(x) {
                                     <option value="5">5</option>
                                 </select>
                                 <label class="lib-label" for="library-dropdown">Add to:</label>
-                                <select id="library-dropdown" >
+                                <select id="library-dropdown" class="${id}" onchange="addToLib(this)">
                                     <option value="Library">Library</option>
                                     <option value="Read">Read</option>
                                     <option value="Currently Reading">Currently Reading</option>
@@ -129,6 +178,8 @@ function openPage(x) {
                             <button id="submit-btn">Submit</button>
                         </div>
                     </section>`
+        getLibrary(id);
+        getRating(id);
         return card;
     }
 }

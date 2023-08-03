@@ -11,7 +11,11 @@ const ratingSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        required: true,
+        required: false,
+    },
+    library: {
+        type: String,
+        required: false,
     }
 });
 
