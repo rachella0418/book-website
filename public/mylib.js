@@ -1,4 +1,3 @@
-
 // GET USER
 fetch("/user", {
     method: "GET",
@@ -19,6 +18,7 @@ fetch("/user", {
     }).then(response => {
         return response.json();
     }).then(data => {
+        // POPULATE SHELVES
         var currentlyReading = [];
         var toBeRead = [];
         var read = [];
@@ -41,7 +41,6 @@ fetch("/user", {
                 shelfid="currently-reading-shelf";
                 shelf = "currentlyReadingShelf";
                 addToShelf(currentlyReading[i], shelf, shelfid);
-                //addToTopShelf(currentlyReading[i]);
             }
             if (i < toBeRead.length) {
                 shelfid="to-be-read-shelf";
@@ -74,7 +73,7 @@ function addToShelf(bookid, shelf, shelfid) {
 function formatOutput(title, cover) {
     var card = `<div class="book">
                     <img id="book-cover" src=${cover}>
-                    <figcaption class="book-title">${title}</figcaption>
+                    <figcaption ID="book-title">${title}</figcaption>
                 </div>`
     return card;
 }
