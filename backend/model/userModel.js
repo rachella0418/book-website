@@ -22,18 +22,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    haveRead: {
-        type: [String],
-        required: false,
-    },
-    currentlyReading: {
-        type: [String],
-        required: false,
-    },
-    toBeRead: {
-        type: [String],
-        required: false,
-    }
 });
 
 module.exports = mongoose.model("user", userSchema);

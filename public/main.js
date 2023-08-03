@@ -44,8 +44,7 @@ function getLibrary(bookid) {
     }).then(response => {
         return response.json();
     }).then(data => {
-        console.log(data.library);
-        if (data.library.library != null) {
+        if (data.library != null && data.library.library != null) {
             document.getElementById("library-dropdown").value = data.library.library;
         }
     })
@@ -86,13 +85,16 @@ function getRating(bookid) {
     }).then(response => {
         return response.json();
     }).then(data => {
-        if (data.rating.rating != null) {
+        if (data.rating != null && data.rating.rating != null) {
             document.getElementById("rating-dropdown").value = data.rating.rating;
         }
     })
 }
 
 function openPage(x) {
+    if (window.location.pathname === "/mylib.html") {
+        $('#libraries-field').css("visibility", "hidden");
+    }
     console.log(x);
     var title, author, cover, summary;
     var outputList = document.getElementById("list-output");
@@ -101,7 +103,6 @@ function openPage(x) {
     document.getElementById("search-res").style.display = "none";
     var outputList = document.getElementById("list-output");
     outputList.innerHTML = "";
-    //document.body.style.backgroundImage - "url('')";
     $.ajax( {
         url: url + x,
         dataType: "json",

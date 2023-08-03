@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
     console.log("Welcome");
 });
 
+// SIGN UP
 app.post('/signup', async (req, res) => {
     console.log(req.body);
     try{
@@ -61,6 +62,7 @@ app.post('/signup', async (req, res) => {
     }
 })
 
+//SIGN IN
 app.post('/signin', async (req, res) => {
     try{
         const {username, password} = req.body;
@@ -93,6 +95,7 @@ app.post('/signin', async (req, res) => {
 
 })
 
+// GET USER
 app.get('/user', isAuthenticate, async (req, res) => {
     try{
         const user = req.user;
@@ -110,6 +113,7 @@ app.get('/user', isAuthenticate, async (req, res) => {
     }
 });
 
+// UPDATE USER INFORMATION
 app.post('/update', isAuthenticate, async (req, res) => {
     try{
         const user = req.user;
@@ -158,6 +162,7 @@ app.post('/update', isAuthenticate, async (req, res) => {
     }
 });
 
+// LOG OUT
 app.put('/logout', isAuthenticate, (req, res) => {
     try{
         const user = req.user;
@@ -175,6 +180,7 @@ app.put('/logout', isAuthenticate, (req, res) => {
     }
 })
 
+// ADD TO LIBRARY
 app.post('/addToLib', async(req, res) => {
     console.log(req.body);
     try {
@@ -238,6 +244,7 @@ app.post('/addToLib', async(req, res) => {
     }
 });
 
+// GET LIBRARY
 app.post('/getLibrary', async(req, res) => {
     try {
         const {username, bookid} = req.body;
@@ -250,6 +257,7 @@ app.post('/getLibrary', async(req, res) => {
     }
 })
 
+// WRITE A REVIEW
 app.post('/review', async(req, res) => {
     try{
         const {author, content, book} = req.body;
@@ -266,6 +274,7 @@ app.post('/review', async(req, res) => {
     }
 })
 
+// SET RATING
 app.post('/setRating', async(req, res) => {
     try  {
         const {username, bookid, rating} = req.body;
@@ -286,6 +295,7 @@ app.post('/setRating', async(req, res) => {
     }
 })
 
+// GET RATING
 app.post('/getRating', async(req, res) => {
     try{
         const {username, bookid} = req.body;
@@ -295,6 +305,17 @@ app.post('/getRating', async(req, res) => {
     catch(error){
         console.log({error});
         return res.status(500).send('error added successful');
+    }
+})
+
+// GET BOOKS IN ALL LIBRARY
+app.post('/getBooksInLib', async(req, res) => {
+    try {
+        const {username} = req.body;
+        const rating = await Rating.find({username: username});
+        return res.json({rating});
+    } catch (error) {
+        console.log({error});
     }
 })
 
