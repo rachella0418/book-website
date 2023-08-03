@@ -140,12 +140,19 @@ $(document).ready(function() {
                             <span id="book-title" class="${id}" onclick="openPage(this.className)">${title}</span>
                             <span id="book-author" class="${id}" onclick="openPage(this.className)">${author}</span>
                             <select onchange="addToLib(this)" id="add-option" class="${id}">
-                                <option value="Select">Select</option>
+                                <option value="Select">Library</option>
                                 <option value="Read">Read</option>
                                 <option value="Currently Reading">Currently Reading</option>
                                 <option value="To Be Read">To Be Read</option>
                             </select>
-                            <input type="name" id="rating" min="1" max="5" step="0.5" placeholder="Rating">
+                            <select onchange="rateBook(this)" id="add-option" class="${id}">
+                                <option value="Select">Rating</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>  
                     </div>`
         return card;

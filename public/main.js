@@ -21,7 +21,26 @@ function addToLib(x) {
             "Content-type": "application/json"
         },
         body: JSON.stringify(obj)
+    }).then(response => {
+        console.log(response.status);
     }) 
+}
+
+function rateBook(x) {
+    var obj = {
+        username: username,
+        bookid: x.className,
+        rating: x.value
+    };
+    fetch('/rating', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then(response => {
+        console.log(response.status);
+    })
 }
 
 function openPage(x) {
@@ -59,7 +78,7 @@ function openPage(x) {
                                     <h2 class="author">${author}</h2>
                                     <p class="summary">${summary}</p>
                                     <label class="rating-label" for="rating-dropdown">Rating:</label>
-                                    <select id="rating-dropdown" class="${id}">
+                                    <select id="rating-dropdown" class="${id}" onchange="rateBook(this)">
                                         <option value="Select">Select</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -121,7 +140,6 @@ function showReviewWindow() {
 function closeReviewWindow() {
     $("#popup-background").css("display", "none");
 }
-
 
 
 
