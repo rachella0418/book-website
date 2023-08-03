@@ -259,7 +259,7 @@
     margin-bottom: 10px;
 }
 
-form #new-review {
+#popup-background #new-review {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -267,7 +267,7 @@ form #new-review {
     margin-top: 40px;
 }
 
-form textarea {
+#popup-background textarea {
     background-color: var(--primary-color);
     border: 2px solid var(--secondary-color);
     border-radius: 15px;
@@ -285,7 +285,7 @@ form textarea {
     border: 2px solid var(--secondary-color);
 }
 
-#close-btn {
+#close-review-btn {
     color: var(--secondary-color);
     font-size: 18px;
     background-color: transparent;
@@ -296,6 +296,6 @@ form textarea {
     padding: 10px;
 }
 
-#close-btn:hover {
+#close-review-btn:hover {
     cursor: pointer;
 }

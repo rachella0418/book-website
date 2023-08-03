@@ -24,20 +24,14 @@ function addToLib(x) {
     }) 
 }
 
-var outputList = document.getElementById("list-output");
-var title, author, cover, summary;
-var outputList = document.getElementById("list-output");
-var url = "https://www.googleapis.com/books/v1/volumes/";
-var placeholder = './pictures/coverexample.jpg';
-
 function openPage(x) {
     console.log(x);
-    //var title, author, cover, summary;
-    //var outputList = document.getElementById("list-output");
-    //var url = "https://www.googleapis.com/books/v1/volumes/";
-    //var placeholder = './pictures/coverexample.jpg';
+    var title, author, cover, summary;
+    var outputList = document.getElementById("list-output");
+    var url = "https://www.googleapis.com/books/v1/volumes/";
+    var placeholder = './pictures/coverexample.jpg';
     document.getElementById("search-res").style.display = "none";
-    //var outputList = document.getElementById("list-output");
+    var outputList = document.getElementById("list-output");
     outputList.innerHTML = "";
     //document.body.style.backgroundImage - "url('')";
     $.ajax( {
@@ -53,7 +47,6 @@ function openPage(x) {
             outputList.innerHTML += formatOutput(x, title, author, cover, summary);
         }
     });
-
     function formatOutput(id, title, author, cover, summary) {
         var card = `<section id="field">
                         <div id="book-field">
@@ -88,9 +81,9 @@ function openPage(x) {
                             </div>
                         </div>
                     </section>
-                    <form id="popup-background">
+                    <section id="popup-background">
                         <div id="popup-window">
-                            <button id="close-btn" onclick="closeReviewWindow()"><i class="fa-solid fa-xmark"></i></button>
+                            <button id="close-review-btn" onclick="closeReviewWindow()"><i class="fa-solid fa-xmark"></i></button>
                             <h1 id="popup-message">Write a review</h1>
                             <div id="dropdowns">
                                 <label class="rating-label" for="rating-dropdown">Rating:</label>
@@ -116,7 +109,7 @@ function openPage(x) {
                             </div>
                             <button id="submit-btn">Submit</button>
                         </div>
-                    </form>`
+                    </section>`
         return card;
     }
 }
@@ -128,6 +121,7 @@ function showReviewWindow() {
 function closeReviewWindow() {
     $("#popup-background").css("display", "none");
 }
+
 
 
 
