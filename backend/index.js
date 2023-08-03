@@ -5,6 +5,7 @@ const dbConnection = require('./config/db');
 const jwt = require('jsonwebtoken');
 const User = require('./model/userModel');
 const Review = require('./model/reviewModel');
+const Rating = require('./model/ratingModel');
 const isAuthenticate = require('./auth');
 const cookieParser = require('cookie-parser');
 
@@ -242,6 +243,27 @@ app.post('/review', async(req, res) => {
         return res.status(500).send('error added successful');
     }
 })
+
+app.post('/rating', async(req, res) => {
+    try  {
+        const {username, bookid, rating} = req.body;
+        const alreadyRated = await Rating.findOne({username: username, bookid: bookid});
+        if (alreadyRated) {
+            await Rating.findOneAndUpdate({username, bookid}, {rating: rating})
+        } else {
+            await Rating.create( {
+                username,
+                bookid,
+                rating
+            })
+        }
+    }
+    catch (error) {
+        console.log({error});
+        return res.status(500).send('error added successful');
+    }
+})
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 })
