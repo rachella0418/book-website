@@ -196,47 +196,6 @@ app.post('/addToLib', async(req, res) => {
                 library
             })
         }
-        /*if (library == "Read") {
-            await User.findOneAndUpdate( 
-                {username: username},
-                {$addToSet: {haveRead: id}}
-            )
-            await User.findOneAndUpdate( 
-                {username: username},
-                {$pull: {currentlyReading: id}},
-            )
-            await User.findOneAndUpdate( 
-                {username: username},
-                {$pull: {toBeRead: id}},
-            )
-        } else if (library == "Currently Reading") {
-            await User.findOneAndUpdate( 
-                {username: username},
-                {$addToSet: {currentlyReading: id}}
-            )
-            await User.findOneAndUpdate( 
-                {username: username},
-                {$pull: {haveRead: id}},
-            )
-            await User.findOneAndUpdate(
-                {username: username},
-                {$pull: {toBeRead: id}},
-            )
-        } else if (library == "To Be Read") {
-            await User.findOneAndUpdate(
-                {username: username},
-                {$addToSet: {toBeRead: id}},
-            )
-            await User.findOneAndUpdate( 
-                {username: username},
-                {$pull: {haveRead: id}},
-            )
-            await User.findOneAndUpdate(
-                {username: username},
-                {$pull: {currentlyReading: id}},
-            )
-        }    
-        res.status(200).send('Added to Library');*/
     }
     catch (error) {
         console.log({error});
@@ -259,14 +218,18 @@ app.post('/getLibrary', async(req, res) => {
 
 // WRITE A REVIEW
 app.post('/review', async(req, res) => {
+    console.log(req.body);
     try{
-        const {author, content, book} = req.body;
+        const {username, bookid, content} = req.body;
+        const ratingModel = await Rating.findOne({username: username, bookid: bookid});
         const review = await Review.create({
-            author,
+            username,
+            bookid,
+            rating: ratingModel.rating,
             content,
-            book,
+            upvotes: 0,
         })
-        return res.status(200).send('review added successful');
+        return res.json({review});
     }
     catch(error){
         console.log({error});

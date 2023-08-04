@@ -42,14 +42,7 @@
                                 Ox was sixteen when he met the boy on the road, the boy who talked and talked and talked. Ox found out later the boy hadn’t spoken in almost two years before that day, and that the boy belonged to a family who had moved into the house at the end of the lane.
                                 Ox was seventeen when he found out the boy’s secret, asfdasfasddfasdfasdfsafasfdasfsafasdfdasfasdfsadfadsf sldfjlasjf kljalk fjdslkj flajf ;l asjl;fja;l fjnd it painted the world around him in colours of red and orange and violet.
                             </p>
-                            <!--
-                                <div>
-                                <button id="show-more-btn">Show more
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </button>
-                            </div>
-                            -->
-                            
+
                             <label class="rating-label" for="rating-dropdown">Rating:</label>
                             <select id="rating-dropdown" >
                                 <option value="Select">Select</option>
@@ -69,25 +62,29 @@
                             <div id="write-review-div">
                                 <button id="write-review-btn">Write a review</button>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
+
                 
-                <div id="review-field">
+                
+                <!--
+                    <div id="review-field">
                     <div id="profile-div">
                         <div id="profile-pic"></div>
                         <h1 id="username">Name</h1>
                     </div>
                     <div id="review-div">
                         <span>Rating: 5 stars</span>
-                        <p>The young man wanted a role model. He looked long and hard in his youth, but that role model never materialized. His only choice was to embrace all the people in his life he didn't want to be like.</p>
+                        <p>The young man wanted a role model. He looked lon choice was to embrace all the people in his life he didn't want to be like.</p>
                         <div id="btn-div">
                             <button id="upvote-btn">Upvote</button>
                             <button id="reply-btn">Reply</button>
                         </div>
                     </div>
-                </div>
+                </div>   
+                
+
                 
                 <div id="cmt-field">
                     <div id="cmt-divider"></div>
@@ -104,9 +101,25 @@
                         </div>
                     </div>
                 </div>
-
+                -->
             </section>
             
+            <div id="review-field">
+                <div class="same-line">
+                    <span class="username">username</span>
+                    <label for="book-rating">Rating:</label>
+                    <input class="book-rating" value="5 stars">
+                    <label for="upvote">Upvote:</label>
+                    <input class="upvote" value="0">
+                </div>
+                
+                <span class="content">Content</span>
+                <div id="btn-div">
+                    <button id="upvote-btn">Upvote</button>
+                    <button id="reply-btn">Reply</button>
+                </div>
+            </div>
+
             <form id="popup-background">
                 <div id="popup-window">
                     <button id="close-btn"><i class="fa-solid fa-xmark"></i></button>

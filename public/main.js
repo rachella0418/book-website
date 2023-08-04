@@ -30,7 +30,7 @@ function addToLib(x) {
     }) 
 }
 
-function getLibrary(bookid) {
+function getLibrary(bookid, elemid) {
     var obj = {
         username: username,
         bookid: bookid
@@ -45,7 +45,7 @@ function getLibrary(bookid) {
         return response.json();
     }).then(data => {
         if (data.library != null && data.library.library != null) {
-            document.getElementById("library-dropdown").value = data.library.library;
+            document.getElementById(elemid).value = data.library.library;
         }
     })
 }
@@ -71,7 +71,7 @@ function rateBook(x) {
     })
 }
 
-function getRating(bookid) {
+function getRating(bookid, elemid) {
     var obj = {
         username: username,
         bookid: bookid,
@@ -86,7 +86,9 @@ function getRating(bookid) {
         return response.json();
     }).then(data => {
         if (data.rating != null && data.rating.rating != null) {
-            document.getElementById("rating-dropdown").value = data.rating.rating;
+            //console.log(document.getElementsByClassName(bookid).value);
+            //document.getElementsByClassName(bookid).value = data.rating.rating;
+            document.getElementById(elemid).value = data.rating.rating;
         }
     })
 }
@@ -156,7 +158,7 @@ function openPage(x) {
                             <h1 id="popup-message">Write a review</h1>
                             <div id="dropdowns">
                                 <label class="rating-label" for="rating-dropdown">Rating:</label>
-                                <select id="rating-dropdown" class="${id}" onchange="rateBook(this)">
+                                <select id="rating-dropdown2" class="${id}" onchange="rateBook(this)">
                                     <option value="Select">Select</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -165,7 +167,7 @@ function openPage(x) {
                                     <option value="5">5</option>
                                 </select>
                                 <label class="lib-label" for="library-dropdown">Add to:</label>
-                                <select id="library-dropdown" class="${id}" onchange="addToLib(this)">
+                                <select id="library-dropdown2" class="${id}" onchange="addToLib(this)">
                                     <option value="Library">Library</option>
                                     <option value="Read">Read</option>
                                     <option value="Currently Reading">Currently Reading</option>
@@ -176,13 +178,76 @@ function openPage(x) {
                                 <label for="review-box">What did you think?</label>
                                 <textarea id="review-box" cols="83" rows="10" placeholder="write your review"></textarea>
                             </div>
-                            <button id="submit-btn">Submit</button>
+                            <button id="submit-btn" class="${id}" onclick="submitReview(this)">Submit</button>
                         </div>
+                        <div id="divider"></div>
                     </section>`
-        getLibrary(id);
-        getRating(id);
+        getLibrary(id, "library-dropdown");
+        getRating(id, "rating-dropdown");
+        getLibrary(id, "library-dropdown2");
+        getRating(id, "rating-dropdown2");
         return card;
     }
+}
+
+function submitReview(x) {
+    obj = {
+        username: username,
+        bookid: x.className,
+        content: document.getElementById("review-box").value
+    }
+    fetch("/review", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then (response => {
+        if (response.status == 200) {
+            closeReviewWindow();
+            return response.json();
+        } else {
+            console.log(response.status);
+        }
+    }).then (data => {
+        var outputList = document.getElementById("list-output");
+        outputList.innerHTML += formatReview(data.review.username, data.review.bookid, data.review.rating, data.review.content, data.review.upvotes);
+    })
+} 
+
+function formatReview(username, bookid, rating, content, upvotes) {
+    var rating;
+    var obj = {
+        username: username,
+        bookid: bookid,
+    };
+    fetch('/getRating', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        rating = data.rating.rating;
+    })
+    var card2 = `<div id="review-field">
+                    <div class="same-line">
+                        <span class="username">${username}</span>
+                        <label for="book-rating">Rating:</label>
+                        <input class="book-rating" value="${rating} stars">
+                        <label for="upvote">Upvotes:</label>
+                        <input class="upvote" value="${upvotes}">
+                    </div>
+                    
+                    <span class="content">${content}</span>
+                    <div id="btn-div">
+                        <button id="upvote-btn">Upvote</button>
+                        <button id="reply-btn">Reply</button>
+                    </div>
+                </div>`
+    return card2
 }
 
 function showReviewWindow() {

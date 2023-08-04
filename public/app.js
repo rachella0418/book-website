@@ -46,7 +46,6 @@ $(document).ready(function() {
 
 
     // SEARCH FEATURE
-    var item, title, author, cover;
     var outputList = document.getElementById("list-output");
     var url = "https://www.googleapis.com/books/v1/volumes?q=";
     var placeholder = './pictures/coverexample.jpg';
@@ -69,11 +68,12 @@ $(document).ready(function() {
             $("#topread-field").css("visibility", "hidden");
         } else if (window.location.pathname === "/profile.html") {
             $('#profile-field').css("visibility", "hidden");
+        } else if (window.location.pathname == "/mylib.html") {
+            $('#libraries-field').css("visibility", "hidden");
         }
         $(".book-list").css("visibility", "visible");
         $("#search-message").css("visibility", "hidden");
         outputList.innerHTML = "";
-        //document.body.style.backgroundImage - "url('')";
         searchData = $(".search").val();
         console.log(searchData);
         if (searchData === null || searchData === "") {
@@ -139,13 +139,7 @@ $(document).ready(function() {
                         <div id="book-about">
                             <span id="book-title" class="${id}" onclick="openPage(this.className)">${title}</span>
                             <span id="book-author" class="${id}" onclick="openPage(this.className)">${author}</span>
-                            <select onchange="addToLib(this)" id="add-option" class="${id}">
-                                <option value="Select">Library</option>
-                                <option value="Read">Read</option>
-                                <option value="Currently Reading">Currently Reading</option>
-                                <option value="To Be Read">To Be Read</option>
-                            </select>
-                            <select onchange="rateBook(this)" id="add-option" class="${id}">
+                            <select onchange="rateBook(this)" id="rate-option" class="${id}">
                                 <option value="Select">Rating</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -153,8 +147,16 @@ $(document).ready(function() {
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
+                            <select onchange="addToLib(this)" id="lib-option" class="${id}">
+                                <option value="Select">Library</option>
+                                <option value="Read">Read</option>
+                                <option value="Currently Reading">Currently Reading</option>
+                                <option value="To Be Read">To Be Read</option>
+                            </select>
                         </div>  
                     </div>`
+        getLibrary(id, "lib-option");
+        getRating(id, "rate-option");        
         return card;
     }
 
