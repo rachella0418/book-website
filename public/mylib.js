@@ -65,14 +65,14 @@ function addToShelf(bookid, shelf, shelfid) {
         dataType: "json",
         success: function(res) {
             cover = (res.volumeInfo.imageLinks) ? res.volumeInfo.imageLinks.thumbnail : placeholder;
-            shelf.innerHTML += formatOutput(res.volumeInfo.title, cover);
+            shelf.innerHTML += formatOutput(res.id, res.volumeInfo.title, cover);
         }
     });
 }
 
-function formatOutput(title, cover) {
+function formatOutput(bookid, title, cover) {
     var card = `<div class="book">
-                    <img id="book-cover" src=${cover}>
+                    <img id="book-cover" class="${bookid}" onclick="openPage(this.className)" src=${cover}>
                     <figcaption ID="book-title">${title}</figcaption>
                 </div>`
     return card;

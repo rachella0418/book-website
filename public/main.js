@@ -9,6 +9,7 @@ fetch("/user", {
     username = data.user.username;
 })
 
+// ADD BOOK TO LIBRARY
 function addToLib(x) {
     var obj = {
         username: username,
@@ -30,6 +31,7 @@ function addToLib(x) {
     }) 
 }
 
+// GET LIBRARY AND UPDATE VALUE FOR LIBRARY DROPDOWN
 function getLibrary(bookid, elemid) {
     var obj = {
         username: username,
@@ -50,6 +52,7 @@ function getLibrary(bookid, elemid) {
     })
 }
 
+// RATE A BOOK
 function rateBook(x) {
     var obj = {
         username: username,
@@ -71,6 +74,7 @@ function rateBook(x) {
     })
 }
 
+// GET RATING OF A BOOK AND UPDATE RATING DROPDOWN VALUE
 function getRating(bookid, elemid) {
     var obj = {
         username: username,
@@ -93,17 +97,18 @@ function getRating(bookid, elemid) {
     })
 }
 
+// OPEN AND DISPLAY REVIEW PAGE
 function openPage(x) {
     if (window.location.pathname === "/mylib.html") {
-        $('#libraries-field').css("visibility", "hidden");
+        $('#libraries-field').css("display", "none");
     }
     console.log(x);
     var title, author, cover, summary;
-    var outputList = document.getElementById("list-output");
     var url = "https://www.googleapis.com/books/v1/volumes/";
     var placeholder = './pictures/coverexample.jpg';
     document.getElementById("search-res").style.display = "none";
     var outputList = document.getElementById("list-output");
+    outputList.style.visibility = "visible";
     outputList.innerHTML = "";
     $.ajax( {
         url: url + x,
@@ -134,6 +139,7 @@ function openPage(x) {
         
         }
     });
+    // FORMAT BOOK INFORMATION SECTION
     function formatOutput(id, title, author, cover, summary) {
         var card = `<section id="field">
                         <div id="book-field">
@@ -206,6 +212,7 @@ function openPage(x) {
     }
 }
 
+// SUBMIT A REVIEW
 function submitReview(x) {
     obj = {
         username: username,
@@ -231,6 +238,7 @@ function submitReview(x) {
     })
 } 
 
+// FORMAT THE REVIEW SECTION
 function formatReview(username, bookid, rating, content, upvotes) {
     var rating;
     var obj = {
@@ -259,11 +267,20 @@ function formatReview(username, bookid, rating, content, upvotes) {
                     
                     <span class="content">${content}</span>
                     <div id="btn-div">
-                        <button id="upvote-btn">Upvote</button>
+                        <button id="upvote-btn" onclick="addUpvote()">Upvote</button>
                         <button id="reply-btn">Reply</button>
                     </div>
                 </div>`
     return card2
+}
+
+function addUpvote() {
+    fetch('/addUpvote', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
 }
 
 function showReviewWindow() {

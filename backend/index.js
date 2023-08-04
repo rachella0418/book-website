@@ -294,6 +294,13 @@ app.post('/getBooksInLib', async(req, res) => {
     }
 })
 
+app.post('/addUpvote', async(req, res) => {
+    try {
+    } catch (error) {
+        console.log({error});
+    }
+})
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 })
