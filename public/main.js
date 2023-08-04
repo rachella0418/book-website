@@ -116,6 +116,22 @@ function openPage(x) {
             summary = res.volumeInfo.description;
             summary = summary.replace("<p><b>", "");     
             outputList.innerHTML += formatOutput(x, title, author, cover, summary);
+            var obj = {
+                bookid: x
+            }
+            fetch('/getReviews', {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(obj)
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                for (var i = 0; i < data.review.length; i++) {
+                    outputList.innerHTML += formatReview(data.review[i].username, data.review[i].bookid, data.review[i].rating, data.review[i].content, data.review[i].upvotes);
+                }
+                console.log(data);
+            })
+        
         }
     });
     function formatOutput(id, title, author, cover, summary) {

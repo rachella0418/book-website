@@ -237,6 +237,18 @@ app.post('/review', async(req, res) => {
     }
 })
 
+app.post('/getReviews', async(req, res) => {
+    console.log(req.body);
+    try {
+        const {bookid} = req.body;
+        const review = await Review.find({bookid: bookid});
+        return res.json({review});
+    } catch (error) {
+        console.log({error});
+        return res.status(500).send('error added successful');
+    }
+})
+
 // SET RATING
 app.post('/setRating', async(req, res) => {
     try  {
