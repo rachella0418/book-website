@@ -101,6 +101,8 @@ function getRating(bookid, elemid) {
 function openPage(x) {
     if (window.location.pathname === "/mylib.html") {
         $('#libraries-field').css("display", "none");
+    } else if (window.location.pathname === "/main.html") {
+        $('mylib-field').css("display", "none");
     }
     console.log(x);
     var title, author, cover, summary;
@@ -124,7 +126,7 @@ function openPage(x) {
             var obj = {
                 bookid: x
             }
-            fetch('/getReviews', {
+            fetch('/getAllReviews', {
                 method: "POST",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(obj)
@@ -262,23 +264,34 @@ function formatReview(username, bookid, rating, content, upvotes) {
                         <label for="book-rating">Rating:</label>
                         <input class="book-rating" value="${rating} stars">
                         <label for="upvote">Upvotes:</label>
-                        <input class="upvote" value="${upvotes}">
+                        <input id="upvote" class="upvote ${username}" value="${upvotes}">
                     </div>
                     
                     <span class="content">${content}</span>
                     <div id="btn-div">
-                        <button id="upvote-btn" onclick="addUpvote()">Upvote</button>
+                        <button id="upvote-btn" class="${username} ${bookid}" onclick="addUpvote(this)">Upvote</button>
                         <button id="reply-btn">Reply</button>
                     </div>
                 </div>`
     return card2
 }
 
-function addUpvote() {
+function addUpvote(x) {
+    const arr = x.className.split(" ");
+    console.log(arr[0]);
+    var obj = {
+        username: arr[0],
+        bookid: arr[1],
+    }
     fetch('/addUpvote', {
         method: "POST",
         headers: {
             "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then (response => {
+        if (response.status == 200) {
+            openPage(obj.bookid);
         }
     })
 }

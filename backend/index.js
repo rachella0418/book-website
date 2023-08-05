@@ -237,7 +237,7 @@ app.post('/review', async(req, res) => {
     }
 })
 
-app.post('/getReviews', async(req, res) => {
+app.post('/getAllReviews', async(req, res) => {
     console.log(req.body);
     try {
         const {bookid} = req.body;
@@ -296,6 +296,22 @@ app.post('/getBooksInLib', async(req, res) => {
 
 app.post('/addUpvote', async(req, res) => {
     try {
+        const {username, bookid} = req.body;
+        const review = await Review.findOneAndUpdate(
+            {username, bookid},
+            {$inc: {upvotes: 1}}
+        );
+        return res.json({review});
+    } catch (error) {
+        console.log({error});
+    }
+})
+
+app.post('/getReview', async(req, res) => {
+    try {
+        const {username, bookid} = req.body;
+        const review = await Review.findOne({username, bookid});
+        return res.json({review});
     } catch (error) {
         console.log({error});
     }
