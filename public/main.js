@@ -1,4 +1,5 @@
 var username = "";
+var currUser = ""
 // GET USER
 fetch("/user", {
     method: "GET",
@@ -6,13 +7,14 @@ fetch("/user", {
 }).then(response => {
     return response.json();
 }).then(data => {
-    username = data.user.username;
+    currUser = data.user.username;
+    //username = data.user.username;
 })
 
 // ADD BOOK TO LIBRARY
 function addToLib(x) {
     var obj = {
-        username: username,
+        username: currUser,
         bookid: x.className,
         library: x.value  
     };
@@ -34,7 +36,7 @@ function addToLib(x) {
 // GET LIBRARY AND UPDATE VALUE FOR LIBRARY DROPDOWN
 function getLibrary(bookid, elemid) {
     var obj = {
-        username: username,
+        username: currUser,
         bookid: bookid
     };
     fetch('/getLibrary', {
@@ -55,7 +57,7 @@ function getLibrary(bookid, elemid) {
 // RATE A BOOK
 function rateBook(x) {
     var obj = {
-        username: username,
+        username: currUser,
         bookid: x.className,
         rating: x.value
     };
@@ -77,7 +79,7 @@ function rateBook(x) {
 // GET RATING OF A BOOK AND UPDATE RATING DROPDOWN VALUE
 function getRating(bookid, elemid) {
     var obj = {
-        username: username,
+        username: currUser,
         bookid: bookid,
     };
     fetch('/getRating', {
@@ -135,6 +137,9 @@ function openPage(x) {
             }).then(data => {
                 for (var i = 0; i < data.review.length; i++) {
                     outputList.innerHTML += formatReview(data.review[i].username, data.review[i].bookid, data.review[i].rating, data.review[i].content, data.review[i].upvotes);
+                    if (data.review[i].username == currUser) {
+                        addUserBtns(data.review[i].bookid);
+                    }
                 }
                 console.log(data);
             })
@@ -217,7 +222,7 @@ function openPage(x) {
 // SUBMIT A REVIEW
 function submitReview(x) {
     obj = {
-        username: username,
+        username: currUser,
         bookid: x.className,
         content: document.getElementById("review-box").value
     }
@@ -230,34 +235,13 @@ function submitReview(x) {
     }).then (response => {
         if (response.status == 200) {
             closeReviewWindow();
-            return response.json();
-        } else {
-            console.log(response.status);
-        }
-    }).then (data => {
-        var outputList = document.getElementById("list-output");
-        outputList.innerHTML += formatReview(data.review.username, data.review.bookid, data.review.rating, data.review.content, data.review.upvotes);
+            openPage(x.className);
+        } 
     })
 } 
 
 // FORMAT THE REVIEW SECTION
 function formatReview(username, bookid, rating, content, upvotes) {
-    var rating;
-    var obj = {
-        username: username,
-        bookid: bookid,
-    };
-    fetch('/getRating', {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(obj)
-    }).then(response => {
-        return response.json();
-    }).then(data => {
-        rating = data.rating.rating;
-    })
     var card2 = `<div id="review-field">
                     <div class="same-line">
                         <span class="username">${username}</span>
@@ -269,16 +253,25 @@ function formatReview(username, bookid, rating, content, upvotes) {
                     
                     <span class="content">${content}</span>
                     <div id="btn-div">
+                        <button id="edit-btn" class="${username} ${bookid}">Edit</button>
                         <button id="upvote-btn" class="${username} ${bookid}" onclick="addUpvote(this)">Upvote</button>
-                        <button id="reply-btn">Reply</button>
+                        <button id="unvote-btn" class="${username} ${bookid}">Unvote</button>
+                        <button id="reply-btn" class="${username} ${bookid}">Reply</button>
+                        <button id="delete-btn" class="${username} ${bookid}" onclick="deleteReview(this)">Delete</button>
                     </div>
                 </div>`
     return card2
 }
 
+function addUserBtns(bookid) {
+    const temp = currUser + " " + bookid;
+    var buttons = document.getElementsByClassName(temp);
+    buttons[0].style.display = "inline";
+    buttons[4].style.display = "inline";
+}
+
 function addUpvote(x) {
     const arr = x.className.split(" ");
-    console.log(arr[0]);
     var obj = {
         username: arr[0],
         bookid: arr[1],
@@ -292,6 +285,25 @@ function addUpvote(x) {
     }).then (response => {
         if (response.status == 200) {
             openPage(obj.bookid);
+        }
+    })
+}
+
+function deleteReview(x) {
+    const arr = x.className.split(" ");
+    var obj = {
+        username: arr[0],
+        bookid: arr[1]
+    }
+    fetch('/deleteReview', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then (response => {
+        if (response.status == 200) {
+            openPage(obj. bookid);
         }
     })
 }

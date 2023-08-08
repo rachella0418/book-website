@@ -218,7 +218,6 @@ app.post('/getLibrary', async(req, res) => {
 
 // WRITE A REVIEW
 app.post('/review', async(req, res) => {
-    console.log(req.body);
     try{
         const {username, bookid, content} = req.body;
         const ratingModel = await Rating.findOne({username: username, bookid: bookid});
@@ -238,7 +237,6 @@ app.post('/review', async(req, res) => {
 })
 
 app.post('/getAllReviews', async(req, res) => {
-    console.log(req.body);
     try {
         const {bookid} = req.body;
         const review = await Review.find({bookid: bookid});
@@ -311,6 +309,16 @@ app.post('/getReview', async(req, res) => {
     try {
         const {username, bookid} = req.body;
         const review = await Review.findOne({username, bookid});
+        return res.json({review});
+    } catch (error) {
+        console.log({error});
+    }
+})
+
+app.post('/deleteReview', async(req, res) => {
+    try {
+        const {username, bookid} = req.body;
+        const review = await Review.findOneAndDelete({username, bookid});
         return res.json({review});
     } catch (error) {
         console.log({error});
