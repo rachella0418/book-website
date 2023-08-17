@@ -1,15 +1,24 @@
 var username = "";
-var currUser = ""
+var currUser = "";
+var reviewsVoted = [];
+//var currBook = "";
 // GET USER
-fetch("/user", {
-    method: "GET",
-    headers: { "Content-type": "application/json" },
-}).then(response => {
-    return response.json();
-}).then(data => {
-    currUser = data.user.username;
-    //username = data.user.username;
-})
+
+function refreshPage() {
+    fetch("/user", {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        reviewsVoted = [];
+        currUser = data.user.username;
+        console.log(data.user.bookVoted);
+        for (var i = 0; i < data.user.bookVoted.length; i++) {
+            reviewsVoted[i] = data.user.bookVoted[i];
+        }
+    })
+}
 
 // ADD BOOK TO LIBRARY
 function addToLib(x) {
@@ -101,12 +110,13 @@ function getRating(bookid, elemid) {
 
 // OPEN AND DISPLAY REVIEW PAGE
 function openPage(x) {
+    //currBook = x;
     if (window.location.pathname === "/mylib.html") {
         $('#libraries-field').css("display", "none");
     } else if (window.location.pathname === "/main.html") {
         $('mylib-field').css("display", "none");
     }
-    console.log(x);
+    refreshPage();
     var title, author, cover, summary;
     var url = "https://www.googleapis.com/books/v1/volumes/";
     var placeholder = './pictures/coverexample.jpg';
@@ -118,7 +128,6 @@ function openPage(x) {
         url: url + x,
         dataType: "json",
         success: function(res) {
-            console.log(res);
             title = res.volumeInfo.title;
             author = res.volumeInfo.authors;
             cover = (res.volumeInfo.imageLinks) ? res.volumeInfo.imageLinks.thumbnail : placeholder;
@@ -135,13 +144,29 @@ function openPage(x) {
             }).then(response => {
                 return response.json();
             }).then(data => {
-                for (var i = 0; i < data.review.length; i++) {
-                    outputList.innerHTML += formatReview(data.review[i].username, data.review[i].bookid, data.review[i].rating, data.review[i].content, data.review[i].upvotes);
-                    if (data.review[i].username == currUser) {
-                        addUserBtns(data.review[i].bookid);
+                collectReview();
+                async function collectReview() {
+                    for (var i = 0; i < data.review.length; i++) {
+                        const data2 = await fetchReview(data.review[i]._id.toString());
+                        outputList.innerHTML += formatReview(data2);
+                        var buttons = document.getElementsByClassName(data.review[i]._id.toString());
+                        
+                        if (data2.review.username == currUser) {
+                            buttons[0].style.display = "inline";
+                            buttons[1].style.display = "none";
+                            buttons[2].style.display = "none";
+                            buttons[3].style.display = "none";
+                            buttons[4].style.display = "inline";
+                        } else {
+                            buttons[1].style.display = "inline";
+                            buttons[2].style.display = "none";
+                            if (reviewsVoted.includes(data2.review._id.toString()) == true) {
+                                buttons[1].style.display = "none";
+                                buttons[2].style.display = "inline";
+                            }
+                        }                        
                     }
                 }
-                console.log(data);
             })
         
         }
@@ -186,7 +211,7 @@ function openPage(x) {
                             <button id="close-review-btn" onclick="closeReviewWindow()"><i class="fa-solid fa-xmark"></i></button>
                             <h1 id="popup-message">Write a review</h1>
                             <div id="dropdowns">
-                                <label class="rating-label" for="rating-dropdown">Rating:</label>
+                                <label class="rating-label2" for="rating-dropdown">Rating:</label>
                                 <select id="rating-dropdown2" class="${id}" onchange="rateBook(this)">
                                     <option value="Select">Select</option>
                                     <option value="1">1</option>
@@ -195,7 +220,7 @@ function openPage(x) {
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                 </select>
-                                <label class="lib-label" for="library-dropdown">Add to:</label>
+                                <label class="lib-label2" for="library-dropdown">Add to:</label>
                                 <select id="library-dropdown2" class="${id}" onchange="addToLib(this)">
                                     <option value="Library">Library</option>
                                     <option value="Read">Read</option>
@@ -204,8 +229,8 @@ function openPage(x) {
                                 </select>
                             </div>
                             <div id="new-review">
-                                <label for="review-box">What did you think?</label>
-                                <textarea id="review-box" cols="83" rows="10" placeholder="write your review"></textarea>
+                                <label class="textarea-label" for="review-box">What did you think?</label>
+                                <textarea id="review-box" cols="83" rows="10"></textarea>
                             </div>
                             <button id="submit-btn" class="${id}" onclick="submitReview(this)">Submit</button>
                         </div>
@@ -240,71 +265,119 @@ function submitReview(x) {
     })
 } 
 
-// FORMAT THE REVIEW SECTION
-function formatReview(username, bookid, rating, content, upvotes) {
-    var card2 = `<div id="review-field">
-                    <div class="same-line">
-                        <span class="username">${username}</span>
-                        <label for="book-rating">Rating:</label>
-                        <input class="book-rating" value="${rating} stars">
-                        <label for="upvote">Upvotes:</label>
-                        <input id="upvote" class="upvote ${username}" value="${upvotes}">
-                    </div>
-                    
-                    <span class="content">${content}</span>
-                    <div id="btn-div">
-                        <button id="edit-btn" class="${username} ${bookid}">Edit</button>
-                        <button id="upvote-btn" class="${username} ${bookid}" onclick="addUpvote(this)">Upvote</button>
-                        <button id="unvote-btn" class="${username} ${bookid}">Unvote</button>
-                        <button id="reply-btn" class="${username} ${bookid}">Reply</button>
-                        <button id="delete-btn" class="${username} ${bookid}" onclick="deleteReview(this)">Delete</button>
-                    </div>
-                </div>`
-    return card2
-}
-
-function addUserBtns(bookid) {
-    const temp = currUser + " " + bookid;
-    var buttons = document.getElementsByClassName(temp);
-    buttons[0].style.display = "inline";
-    buttons[4].style.display = "inline";
-}
-
-function addUpvote(x) {
-    const arr = x.className.split(" ");
-    var obj = {
-        username: arr[0],
-        bookid: arr[1],
-    }
-    fetch('/addUpvote', {
+async function fetchReview(reviewid) {
+    const response = await fetch('/getReview', {
         method: "POST",
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify(obj)
-    }).then (response => {
-        if (response.status == 200) {
-            openPage(obj.bookid);
-        }
+        body: JSON.stringify({reviewid: reviewid})
+    });
+    let review = await response.json();
+    review = JSON.stringify(review);
+    review = JSON.parse(review);
+    return review;
+}
+
+// FORMAT THE REVIEW SECTION
+function formatReview(data) {
+    var card = `<div id="review-field">
+                    <div class="same-line">
+                        <span class="username">${data.review.username}</span>
+                        <label for="book-rating">Rating:</label>
+                        <input class="book-rating" value="${data.review.rating} stars">
+                        <label for="upvote">Upvotes:</label>
+                        <input id="upvote" class="upvote ${data.review.username}" value="${data.review.upvotes}">
+                    </div>
+                    
+                    <span class="content">${data.review.content}</span>
+                    <div id="btn-div">
+                        <button id="edit-btn" class="${data.review._id.toString()}">Edit</button>
+                        <button id="upvote-btn" class="${data.review._id.toString()}" onclick="addUpvote(this)">Upvote</button>
+                        <button id="unvote-btn" class="${data.review._id.toString()}" onclick="removeUpvote(this)">Unvote</button>
+                        <button id="reply-btn" class="${data.review._id.toString()}" onclick="replyReview(this)">Reply</button>
+                        <button id="delete-btn" class="${data.review._id.toString()}" onclick="deleteReview(this)">Delete</button>
+                    </div>
+                </div>`
+    return card;
+}
+
+
+
+function replyReview(x) {
+    showReviewWindow();
+    document.getElementById("popup-message").innerHTML = "Write a reply";
+    $("#library-dropdown2").css("display", "none");
+    $("#rating-dropdown2").css("display", "none");
+    $(".lib-label2").css("display", "none");
+    $(".rating-label2").css("display", "none");
+    $(".textarea-label").css("display", "none");
+    $("#new-review").css("top", "60px");
+    $("#submit-btn").css("bottom", "120px");
+    var submitBtn = document.getElementById("submit-btn");
+    submitBtn.onclick = function() {
+        console.log("clicked");
+    }
+}
+
+async function addUpvote(x) {
+    const reviewid = x.className;
+    await fetch('/addUpvote', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({reviewid})
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        fetch('/addBookVoted', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({username: currUser, reviewid})
+        }).then(response => {
+            openPage(data.review.bookid);
+        })
     })
 }
 
-function deleteReview(x) {
-    const arr = x.className.split(" ");
-    var obj = {
-        username: arr[0],
-        bookid: arr[1]
-    }
-    fetch('/deleteReview', {
+async function removeUpvote(x) {
+    const reviewid = x.className;
+    await fetch('/removeUpvote', {
         method: "POST",
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify(obj)
+        body: JSON.stringify({reviewid})
+    }).then(response => {
+        return response.json();
+    }).then (data => {
+        fetch('/removeBookVoted', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({username: currUser, reviewid})
+        }).then(response => {
+            openPage(data.review.bookid);
+        })
+    })
+}
+
+async function deleteReview(x) {
+    const reviewid = x.className;
+    await fetch('/deleteReview', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({reviewid})
     }).then (response => {
-        if (response.status == 200) {
-            openPage(obj. bookid);
-        }
+        return response.json();
+    }).then(data => {
+        openPage(data.bookid);
     })
 }
 

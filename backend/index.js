@@ -247,6 +247,18 @@ app.post('/getAllReviews', async(req, res) => {
     }
 })
 
+app.post('/getReview', async(req, res) => {
+    console.log('getReview');
+    try {
+        const reviewid = req.body.reviewid;
+        console.log(reviewid);
+        const review = await Review.findById(reviewid);
+        return res.json({review});
+    } catch (error) {
+        console.log({error});
+    }
+})
+
 // SET RATING
 app.post('/setRating', async(req, res) => {
     try  {
@@ -293,10 +305,11 @@ app.post('/getBooksInLib', async(req, res) => {
 })
 
 app.post('/addUpvote', async(req, res) => {
+    console.log("/addUpvote: ");
     try {
-        const {username, bookid} = req.body;
-        const review = await Review.findOneAndUpdate(
-            {username, bookid},
+        const reviewid = req.body.reviewid;
+        const review = await Review.findByIdAndUpdate(
+            reviewid,
             {$inc: {upvotes: 1}}
         );
         return res.json({review});
@@ -305,10 +318,14 @@ app.post('/addUpvote', async(req, res) => {
     }
 })
 
-app.post('/getReview', async(req, res) => {
+app.post('/removeUpvote', async(req, res) => {
+    console.log("/removeUpvote: ");
     try {
-        const {username, bookid} = req.body;
-        const review = await Review.findOne({username, bookid});
+        const reviewid = req.body.reviewid;
+        const review = await Review.findByIdAndUpdate(
+            reviewid,
+            {$inc: {upvotes: -1}}
+        );
         return res.json({review});
     } catch (error) {
         console.log({error});
@@ -317,9 +334,42 @@ app.post('/getReview', async(req, res) => {
 
 app.post('/deleteReview', async(req, res) => {
     try {
-        const {username, bookid} = req.body;
-        const review = await Review.findOneAndDelete({username, bookid});
-        return res.json({review});
+        const reviewid = req.body.reviewid;
+        const review = await Review.findById(reviewid);
+        const bookid = review.bookid;
+        await Review.findByIdAndDelete(reviewid);
+        return res.json({bookid});
+    } catch (error) {
+        console.log({error});
+    }
+})
+
+app.post('/addBookVoted', async(req, res) => {
+    console.log("/addBookVoted: ");
+    console.log(req.body);
+    try {
+        const {username, reviewid} = req.body;
+        console.log(username);
+        const user = await User.findOneAndUpdate(
+            {username},
+            {$addToSet: {bookVoted: reviewid}}
+        )
+        return res.json({user});
+    } catch (error) {
+        console.log({error});
+    }
+})
+
+app.post('/removeBookVoted', async(req, res) => {
+    console.log("/removeBookVoted: ");
+    console.log(req.body);
+    try {
+        const {username, reviewid} = req.body;
+        const user = await User.findOneAndUpdate(
+            {username},
+            {$pull: {bookVoted: reviewid}}
+        )
+        return res.json({user});
     } catch (error) {
         console.log({error});
     }

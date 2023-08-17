@@ -24,6 +24,10 @@ const reviewSchema = new mongoose.Schema({
     replies: {
         type: [String],
         required: false,
+    },
+    replyTo: {
+        type: String,
+        required: false
     }
 });
 

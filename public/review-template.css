@@ -114,84 +114,6 @@
 
 /* -------- REVIEW FIELD -------- */
 
-/*#review-field {
-    margin-top: 50px;
-    border-top: 2px solid var(--secondary-color);
-    display: flex;
-    justify-content: space-evenly;
-}
-
-#cmt-field {
-    margin-left: 150px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-#cmt-field #profile-pic {
-    height: 70%;
-}
-
-
-#profile-div {
-    width: 100px;
-    height: 100px;
-    justify-content: center;
-    margin: 50px;
-}
-
-#profile-pic {
-    background-image: url("./pictures/background-image.jpg");
-    height: 80%;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
-}
-
-#username {
-    text-align: center;
-    font-size: 18px;
-}
-
-#review-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-#btn-div {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-#upvote-btn, #reply-btn, #submit-btn {
-    font-family: "Playfair Display", sans-serif;
-    font-size: 15px;
-    color: var(--secondary-color);
-    background-color: transparent;
-    border: 3px solid var(--secondary-color);
-    border-radius: 20px;
-    padding: 5px 10px;
-    margin-right: 50px;
-    transition: background 0.3s;
-}
-
-#upvote-btn:hover, #reply-btn:hover, #write-review-btn:hover, #submit-btn:hover {
-    cursor: pointer;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-}
-
-#cmt-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}*/
-
 #review-field {
     border-top: 2px solid var(--secondary-color);
     display: flex;
@@ -310,7 +232,12 @@
     left: 50px;
 }
 
+/*.rating-label2, .lib-label2 {
+    display: none;
+}*/
+
 #dropdowns select {
+    /*display: none;*/
     padding: 5px;
 }
 
