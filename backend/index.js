@@ -221,13 +221,23 @@ app.post('/review', async(req, res) => {
     try{
         const {username, bookid, content} = req.body;
         const ratingModel = await Rating.findOne({username: username, bookid: bookid});
-        const review = await Review.create({
-            username,
-            bookid,
-            rating: ratingModel.rating,
-            content,
-            upvotes: 0,
-        })
+        const findReview = await Review.findOne({username, bookid});
+        var review;
+        if (findReview == null) {
+            review = await Review.create({
+                username,
+                bookid,
+                rating: ratingModel.rating,
+                content,
+                upvotes: 0,
+            })
+        } else {
+            review = await Review.findOneAndUpdate(
+                {username, bookid},
+                {content: content}
+            )
+        }
+        
         return res.json({review});
     }
     catch(error){
@@ -374,6 +384,8 @@ app.post('/removeBookVoted', async(req, res) => {
         console.log({error});
     }
 })
+
+
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

@@ -190,6 +190,9 @@
     color: var(--primary-color);
 }
 
+#cmt-field {
+    margin-left: 60px;
+}
 
 
 #popup-background {

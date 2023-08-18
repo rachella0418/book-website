@@ -292,7 +292,7 @@ function formatReview(data) {
                     
                     <span class="content">${data.review.content}</span>
                     <div id="btn-div">
-                        <button id="edit-btn" class="${data.review._id.toString()}">Edit</button>
+                        <button id="edit-btn" class="${data.review._id.toString()}" onclick="editReview(this)">Edit</button>
                         <button id="upvote-btn" class="${data.review._id.toString()}" onclick="addUpvote(this)">Upvote</button>
                         <button id="unvote-btn" class="${data.review._id.toString()}" onclick="removeUpvote(this)">Unvote</button>
                         <button id="reply-btn" class="${data.review._id.toString()}" onclick="replyReview(this)">Reply</button>
@@ -301,8 +301,6 @@ function formatReview(data) {
                 </div>`
     return card;
 }
-
-
 
 function replyReview(x) {
     showReviewWindow();
@@ -318,6 +316,33 @@ function replyReview(x) {
     submitBtn.onclick = function() {
         console.log("clicked");
     }
+}
+
+async function editReview(x) {
+    const reviewid = x.className;
+    await fetch('/getReview', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({reviewid})
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        fetch("/getLibrary", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({username: currUser, bookid: data.review.bookid})
+        }).then(response => {
+            return response.json();
+        }).then(data2 => {
+            showReviewWindow();
+            document.getElementById("review-box").innerText = data.review.content;
+            document.getElementById("library-dropdown2").value = data2.library.library
+            document.getElementById("rating-dropdown2").value = data.review.rating;
+        })
+        
+    })
 }
 
 async function addUpvote(x) {
