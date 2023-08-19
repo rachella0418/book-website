@@ -148,23 +148,46 @@ function openPage(x) {
                 async function collectReview() {
                     for (var i = 0; i < data.review.length; i++) {
                         const data2 = await fetchReview(data.review[i]._id.toString());
-                        outputList.innerHTML += formatReview(data2);
-                        var buttons = document.getElementsByClassName(data.review[i]._id.toString());
-                        
-                        if (data2.review.username == currUser) {
-                            buttons[0].style.display = "inline";
-                            buttons[1].style.display = "none";
-                            buttons[2].style.display = "none";
-                            buttons[3].style.display = "none";
-                            buttons[4].style.display = "inline";
-                        } else {
-                            buttons[1].style.display = "inline";
-                            buttons[2].style.display = "none";
-                            if (reviewsVoted.includes(data2.review._id.toString()) == true) {
+                        console.log(data2.review.replies);
+                        if (data2.review.rating != 0) {
+                            outputList.innerHTML += formatReview(data2);
+                            var buttons = document.getElementsByClassName(data.review[i]._id.toString());
+                            if (data2.review.username == currUser) {
+                                buttons[0].style.display = "inline";
                                 buttons[1].style.display = "none";
-                                buttons[2].style.display = "inline";
+                                buttons[2].style.display = "none";
+                                buttons[3].style.display = "none";
+                                buttons[4].style.display = "inline";
+                            } else {
+                                buttons[1].style.display = "inline";
+                                buttons[2].style.display = "none";
+                                if (reviewsVoted.includes(data2.review._id.toString()) == true) {
+                                    buttons[1].style.display = "none";
+                                    buttons[2].style.display = "inline";
+                                }
+                            }             
+                        }
+                        if (data2.review.replies != null) {
+                            for (var j = 0; j < data2.review.replies.length; j++) {
+                                const reply = await fetchReview(data2.review.replies[i]);
+                                outputList.innerHTML += formatReply(reply);
+                                var replyBtns = document.getElementsByClassName(reply.review._id.toString());
+                                if (reply.review.username == currUser) {
+                                    replyBtns[0].style.display = "inline";
+                                    replyBtns[1].style.display = "none";
+                                    replyBtns[2].style.display = "none";
+                                    replyBtns[3].style.display = "inline";
+                                } else {
+                                    replyBtns[1].style.display = "inline";
+                                    replyBtns[2].style.display = "none";
+                                    if (reviewsVoted.includes(reply.review._id.toString()) == true) {
+                                        replyBtns[1].style.display = "none";
+                                        replyBtns[2].style.display = "inline";
+                                    }
+                                }       
                             }
-                        }                        
+                        }
+                                   
                     }
                 }
             })
@@ -233,6 +256,7 @@ function openPage(x) {
                                 <textarea id="review-box" cols="83" rows="10"></textarea>
                             </div>
                             <button id="submit-btn" class="${id}" onclick="submitReview(this)">Submit</button>
+                            <button id="submit-reply-btn" onclick="submitReply(this)">Submit Reply</button>
                         </div>
                         <div id="divider"></div>
                     </section>`
@@ -302,6 +326,25 @@ function formatReview(data) {
     return card;
 }
 
+function formatReply(data) {
+    var card = `<div id="cmt-field">
+                    <div class="same-line">
+                        <span class="username">${data.review.username}</span>
+                        <label for="upvote">Upvotes:</label>
+                        <input id="upvote" class="upvote ${data.review.username}" value="${data.review.upvotes}">
+                    </div>
+                    
+                    <span class="content">${data.review.content}</span>
+                    <div id="btn-div">
+                        <button id="edit-btn" class="${data.review._id.toString()}" onclick="editReview(this)">Edit</button>
+                        <button id="upvote-btn" class="${data.review._id.toString()}" onclick="addUpvote(this)">Upvote</button>
+                        <button id="unvote-btn" class="${data.review._id.toString()}" onclick="removeUpvote(this)">Unvote</button>
+                        <button id="delete-btn" class="${data.review._id.toString()}" onclick="deleteReview(this)">Delete</button>
+                    </div>  
+                </div>`
+    return card;
+}
+
 function replyReview(x) {
     showReviewWindow();
     document.getElementById("popup-message").innerHTML = "Write a reply";
@@ -311,11 +354,30 @@ function replyReview(x) {
     $(".rating-label2").css("display", "none");
     $(".textarea-label").css("display", "none");
     $("#new-review").css("top", "60px");
-    $("#submit-btn").css("bottom", "120px");
-    var submitBtn = document.getElementById("submit-btn");
-    submitBtn.onclick = function() {
-        console.log("clicked");
+    $("#submit-btn").css("display", "none");
+    $("#submit-reply-btn").css("display", "inline");
+    $("#submit-reply-btn").css("bottom", "120px");
+    document.getElementById("submit-reply-btn").className = x.className;
+}
+
+async function submitReply(x) {
+    const obj = {
+        username: currUser,
+        reviewid: x.className,
+        content: document.getElementById("review-box").value
     }
+    await fetch("/reply", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({obj})
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        console.log(data.reply);
+        openPage(data.reply.bookid);
+    })
 }
 
 async function editReview(x) {
@@ -340,8 +402,7 @@ async function editReview(x) {
             document.getElementById("review-box").innerText = data.review.content;
             document.getElementById("library-dropdown2").value = data2.library.library
             document.getElementById("rating-dropdown2").value = data.review.rating;
-        })
-        
+        }) 
     })
 }
 
@@ -408,6 +469,7 @@ async function deleteReview(x) {
 
 function showReviewWindow() {
     $("#popup-background").css("display", "inline");
+    $("#submit-reply-btn").css("display", "none");
 }
 
 function closeReviewWindow() {

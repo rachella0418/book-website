@@ -246,6 +246,39 @@ app.post('/review', async(req, res) => {
     }
 })
 
+app.post('/reply', async(req, res) => {
+    console.log(req.body);
+    try {
+        const username = req.body.obj.username;
+        const reviewid = req.body.obj.reviewid;
+        const content = req.body.obj.content;
+        const review = await Review.findById(reviewid);
+        console.log(review);
+
+        const reply = await Review.create({
+            username: username,
+            bookid: review.bookid,
+            rating: 0,
+            content: content,
+            upvotes: 0,
+        })
+
+        await Review.findByIdAndUpdate(
+            reviewid, 
+            {$addToSet: {replies: reply._id.toString()}}
+        );
+
+        await Review.findByIdAndUpdate(
+            reply._id.toString(),
+            {replyTo: reviewid}
+        )
+
+        return res.json({reply});
+    } catch (error) {
+        console.log({error});
+    }
+})
+
 app.post('/getAllReviews', async(req, res) => {
     try {
         const {bookid} = req.body;
@@ -347,6 +380,9 @@ app.post('/deleteReview', async(req, res) => {
         const reviewid = req.body.reviewid;
         const review = await Review.findById(reviewid);
         const bookid = review.bookid;
+        if (review.replyTo != null) {
+            await Review.findByIdAndUpdate(review.replyTo, {$pull: {replies: reviewid}})
+        }
         await Review.findByIdAndDelete(reviewid);
         return res.json({bookid});
     } catch (error) {

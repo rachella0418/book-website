@@ -120,23 +120,23 @@
     flex-direction: column;
 }
 
-#review-field .same-line {
+.same-line {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-#review-field .username {
+.username {
     font-weight: bold;
     font-size: 20px;
     margin-right: 20px;
 }
 
-#review-field label {
+#review-field label, #cmt-field label {
     font-size: 18px;
     font-weight: bold;
 }
 
-#review-field input {
+#review-field input, #cmt-field input {
     color: var(--secondary-color);
     width: 50px;
     margin-right: 20px;
@@ -146,14 +146,14 @@
     background-color: transparent;
 }
 
-#review-field .content {
+#review-field .content, #cmt-field .content {
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: 20px;
     font-size: 18px;
 }
 
-#review-field span {
+#review-field span, #cmt-field span {
     margin-left: 50px;
 }
 
@@ -173,7 +173,7 @@
     margin-right: 20px;
 }
 
-#btn-div button, #submit-btn {
+#btn-div button, #submit-btn, #submit-reply-btn {
     font-family: "Playfair Display", sans-serif;
     font-size: 15px;
     color: var(--secondary-color);
@@ -184,7 +184,7 @@
     transition: background 0.3s;
 }
 
-#btn-div button:hover, #submit-btn:hover {
+#btn-div button:hover, #submit-btn:hover, #submit-reply-btn:hover {
     cursor: pointer;
     background-color: var(--secondary-color);
     color: var(--primary-color);
@@ -270,7 +270,7 @@
     resize: none;
 }
 
-#submit-btn {
+#submit-btn, #submit-reply-btn {
     position: absolute;
     left: 50px;
     bottom: 65px;
